@@ -11,7 +11,7 @@
  *    #define PLATFORM_UNIX     // For macOS/Unix
  *    Then include this file
  */
-
+#pragma once
  #ifndef _CONSOLE_H_
  #define _CONSOLE_H_
  
