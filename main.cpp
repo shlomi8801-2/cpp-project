@@ -25,15 +25,11 @@ class player{
 int main(){
     cout << "program started!" << endl;
     init_console();
-    
-    // for (int x=0;x<100;x++){
-    //     DrawAt(x,x,'#');
-        
-    // }
-    // sleep_ms(100);
+    Screen s;
+    s.draw();
     while (1){
         showfps();
-        sleep_ms(10);
+        usleep(1);
         
         
     }
