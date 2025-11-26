@@ -3,17 +3,22 @@ class item{
 
 };
 class player{
-    char* controlKeys[6];
+    char controlKeys[6];
     item* inv;
+    int vx =0;//velocity at x axis
+    int vy=0; //velocity at y axis
+    int x;
+    int y;
     enum movement {
         up,
-        down,
         left,
+        down,
         right,
         stay,
         dropItem
     };
-    void move(char key){
-        
-    }
+    public:
+    player(int _x=0,int _y=0,char* keys = "waxdsq");
+    void move();
+    void keyCheck(char key);
 };
