@@ -1,5 +1,7 @@
 #include "player.h"
 #include "utils.h"
+#include "screen.h"
+
 
 #define betterkeys
 //dont use it its for debug just different way of using the keys
@@ -12,10 +14,16 @@ player::player(int _x,int _y,char const keys[]){
         controlKeys[i] = keys[i];
 }
 
-void player::move(){
+void player::move(Screen* grid=nullptr){
     DrawAt(x,y,' ');
-    x +=vx;
-    y -=vy;//y starts at 0 and goes to negative numbers in the screen
+    //currently the blocking will only work for 1 cord at a time
+    x += vx;
+    y -= vy; //y starts at 0 and goes to negative numbers in the screen
+    
+    //does does not work properly
+    //TODO make function to check if can move to in screen class
+    // x +=((grid && !(grid->getatxy(grid->getstartx()+vx,-grid->getstarty()+y-vy)->getfilled())) ? vx:0); 
+    // y -=((grid && !(grid->getatxy(grid->getstartx()+x+vx,-grid->getstarty()+y-vy)->getfilled())) ? vy:0);
 }
 
 #ifndef betterkeys

@@ -1,7 +1,11 @@
 #pragma once
+class Screen;
+#include "screen.h"
 class item{
 
 };
+
+
 class player{
     char controlKeys[6];
     item* inv;
@@ -20,7 +24,7 @@ class player{
     };
     public:
     player(int _x,int _y,char const keys[]);
-    void move();
+    void move(Screen* grid);
     void keyCheck(char key);
     void draw();
 };

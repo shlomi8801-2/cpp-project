@@ -1,18 +1,22 @@
 #pragma once
+class player;
 #include "player.h"
 class object{
     int x;
     int y;
     char Sprite;
-    bool filled = false; // visible/cannot walk throgh
+    bool filled = false; // does it block the player?
+    bool visible = false; // visible
     // friend ostream& operator<<(ostream& out, const object& s) {
     //     return out << s.sprite;
     // }
     public:
         char getSprite() { return Sprite;}
+        bool getvisible() { return visible;}
         bool getfilled() { return filled;}
         void showinfo();
         void setSprite(char c){Sprite = c;}
+        void setvisible(bool state){visible = state;}
         void setfilled(bool state){filled = state;}
 };
 class Screen{
@@ -23,6 +27,9 @@ class Screen{
     object* objarr;
     player* parr[2];
     public:
+        inline int getstartx(){return startx;}
+                inline int getstarty(){return starty;}
+
         Screen();
         void drawDefaultWalls();
         object* getatxy(const int x,const int y);
