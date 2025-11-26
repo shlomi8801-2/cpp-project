@@ -1,3 +1,4 @@
+#include <player.h>
 class object{
     int x;
     int y;
@@ -14,11 +15,15 @@ class object{
         void setfilled(bool state){filled = state;}
 };
 class Screen{
+    int startx=0;
+    int starty=1;
     int width = 80;
     int height = 25;
-    object* arr;
+    object* objarr;
+    player* parr[2];
     public:
-    Screen();
+        Screen();
+        void drawDefaultWalls();
         object* getatxy(const int x,const int y);
         void setatxy(const int x, const int y,object* obj);
         void draw();
