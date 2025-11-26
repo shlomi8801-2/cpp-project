@@ -3,7 +3,7 @@
 #include "screen.h"
 #include "player.h"
 
-#define fps 10
+#define fps 60
 using namespace std;
 
 
@@ -12,7 +12,7 @@ int main(){
     init_console();
     hideCursor();
     Screen s;
-    player p1(5,5,"waxdsq");
+    player p1(5,5,"dxawse");
     s.draw();
     while (1){
         showfps();

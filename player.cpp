@@ -5,7 +5,7 @@
 //dont use it its for debug just different way of using the keys
 
 
-player::player(int _x,int _y,char keys[]){
+player::player(int _x,int _y,char const keys[]){
     x=_x;
     y=_y;
     for (int i=0;i<6;i++)

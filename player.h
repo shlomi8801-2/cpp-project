@@ -11,15 +11,15 @@ class player{
     int y;
     char sprite = 'a';
     enum movement {
-        up,
-        left,
-        down,
         right,
+        down,
+        left,
+        up,
         stay,
         dropItem
     };
     public:
-    player(int _x,int _y,char keys[]);
+    player(int _x,int _y,char const keys[]);
     void move();
     void keyCheck(char key);
     void draw();
