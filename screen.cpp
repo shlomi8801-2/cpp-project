@@ -2,6 +2,7 @@
 #include "console.h"
 #include <iostream>
 #include "screen.h"
+#include "console.h"
 using namespace std;
 //use array to store the screen background and have another array for players to draw    
 
@@ -43,6 +44,7 @@ void object::showinfo(){
     }
     void Screen::draw(){
         //draw the whole screen - dont use alot its not optimized only at the start or big object removal
+        clrscr();
         for (int y=0;y<height;y++){
             for (int x=0; x<width;x++){
                 // cout<< x<<","<<y<<"\n";

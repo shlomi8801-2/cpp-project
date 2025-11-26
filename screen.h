@@ -1,4 +1,5 @@
-#include <player.h>
+#pragma once
+#include "player.h"
 class object{
     int x;
     int y;

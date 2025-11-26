@@ -3,25 +3,9 @@
 #include "screen.h"
 
 using namespace std;
-class item{
 
-};
 
-class player{
-    char* controlKeys[6];
-    item* inv;
-    enum movement {
-        up,
-        down,
-        left,
-        right,
-        stay,
-        dropItem
-    };
-    void move(char key){
-        
-    }
-};
+
 int main(){
     cout << "program started!" << endl;
     init_console();
@@ -29,7 +13,7 @@ int main(){
     s.draw();
     while (1){
         showfps();
-        usleep(1);
+        usleep(16);
         
         
     }
