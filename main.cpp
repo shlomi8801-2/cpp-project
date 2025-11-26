@@ -3,8 +3,8 @@
 #include "screen.h"
 #include "player.h"
 
+#define fps 10
 using namespace std;
-
 
 
 int main(){
@@ -22,8 +22,7 @@ int main(){
         }
         p1.move();
         p1.draw();
-
-        usleep(100000);
+        sleep_ms((1.0/fps)*1000); // requires the 1.0 for it to stay not int
         
         
     }

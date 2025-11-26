@@ -18,8 +18,8 @@ class object{
 class Screen{
     int startx=0;
     int starty=1;
-    int width = 80;
-    int height = 25;
+    const int width = 80;
+    const int height = 25;
     object* objarr;
     player* parr[2];
     public:
