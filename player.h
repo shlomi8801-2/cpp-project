@@ -13,6 +13,7 @@ class player{
     int vy=0; //velocity at y axis
     int x;
     int y;
+    Screen* grid = nullptr;
     char sprite = 'a';
     enum movement {
         right,
@@ -23,8 +24,8 @@ class player{
         dropItem
     };
     public:
-    player(int _x,int _y,char const keys[]);
-    void move(Screen* grid);
+    player(int _x,int _y,char const keys[],Screen* _grid);
+    void move();
     void keyCheck(char key);
     void draw();
 };

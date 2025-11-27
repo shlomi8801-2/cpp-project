@@ -63,3 +63,8 @@ void object::showinfo(){
         }
         cout << flush; // clear the buffer of the screen in case cout missed some characters it forces it to print them somehow i think
     }
+    bool Screen::canMove(const int x,const int y){
+        //on the start of the screen ofc(no need to add)
+        cout<<y;
+        return !((x>=0 && y>=0&&x<=width &&y<=-height)||getatxy(x,y)->getfilled()); // y is -height because the screen starts at 0 0 and shows at x -y
+    }

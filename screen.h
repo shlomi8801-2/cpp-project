@@ -28,11 +28,11 @@ class Screen{
     player* parr[2];
     public:
         inline int getstartx(){return startx;}
-                inline int getstarty(){return starty;}
-
+        inline int getstarty(){return starty;}
         Screen();
         void drawDefaultWalls();
         object* getatxy(const int x,const int y);
         void setatxy(const int x, const int y,const object* obj);
         void draw();
+        bool canMove(const int x,const int y);
 };
