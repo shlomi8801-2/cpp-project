@@ -11,21 +11,21 @@ player::player(int _x,int _y,char const keys[]){
     x=_x;
     y=_y;
     for (int i=0;i<6;i++)
+    //copying the keys to an array stored in the player object
         controlKeys[i] = keys[i];
 }
 
 void player::move(Screen* grid=nullptr){
-    DrawAt(x,y,' ');
+    //erase the previous player char by getting the block the player is on and checking if its visible if true draw it if not draw blank(space)
+    object* onblock = grid->getatxy(x,y);
+    DrawAt(x,y,onblock->getvisible() ? onblock->getSprite(): ' ');
     //currently the blocking will only work for 1 cord at a time
     x += vx;
     y -= vy; //y starts at 0 and goes to negative numbers in the screen
     
-    //does does not work properly
     //TODO make function to check if can move to in screen class
-    // x +=((grid && !(grid->getatxy(grid->getstartx()+vx,-grid->getstarty()+y-vy)->getfilled())) ? vx:0); 
-    // y -=((grid && !(grid->getatxy(grid->getstartx()+x+vx,-grid->getstarty()+y-vy)->getfilled())) ? vy:0);
 }
-
+//just changes the way controls work(betterkeys just add the option to stop moving by trying to move the opposite direction)
 #ifndef betterkeys
 void player::keyCheck(char key=0){ // keyc - key char
     int i;
@@ -92,5 +92,6 @@ void player::keyCheck(char key=0){ // keyc - key char
 }
 #endif
 void player::draw(){
+    //because the player is only 1 char using DrawAt function
     DrawAt(x,y,sprite);
 }

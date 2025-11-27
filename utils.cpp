@@ -10,6 +10,7 @@ void DrawAt(int x,int y,char c){
     cout<<c<<std::flush;   
 }
 int getfps(){
+    //counts the times run before last check and devide the times run by the delta of time in seconds to get fps
     static int lasttime = 0;
     static long loops = 0;
     static int lastfps =0;
@@ -28,6 +29,7 @@ int getfps(){
 }
 void showfps(){
     //run every frame in the loop or just the getfps() and only when you want to show the fps
+    //dont use without delay!!!(printing to screen is much slower so it just prints nonstop)
     const int x =0,y=0,width = 10;
     gotoxy(x,y);
 

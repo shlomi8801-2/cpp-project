@@ -11,6 +11,7 @@ void object::showinfo(){
 }
     Screen::Screen(){
         int maxidx = height*width;
+        //like that every 80 characters is a row in the screen so if you for example want to get 1,1 pos you need 80*1+1 in the array
         objarr = new object[maxidx];// 25 arrays of 80 items(2d array will represent the same way in the memory as array)
         //fill the screen with blank objects - no need because it has default values as object types
         drawDefaultWalls();
@@ -40,24 +41,25 @@ void object::showinfo(){
             objarr[width*i+width-1].setfilled(true);
         }
     }
-    void Screen::setatxy(const int x, const int y,object* obj){
+    void Screen::setatxy(const int x, const int y,const object* obj){
         //if out of screen doing nothing
         int idx = y*width+x;
-        if (idx>=0 && idx <=height*width)
+        if (idx>=0 && idx <=height*width) //checking if its in the screen
         objarr[idx] = *obj;
     }
     void Screen::draw(){
         //draw the whole screen - dont use alot its not optimized only at the start or big object removal
         clrscr();
+        int idx;
         for (int y=0;y<height;y++){
             for (int x=0; x<width;x++){
                 // cout<< x<<","<<y<<"\n";
-                int idx =y*width+x;
+                idx =y*width+x;
                 if (objarr[idx].getvisible()){
                     gotoxy(startx+x,starty+y);
                     cout<<objarr[y*width+x].getSprite();
                 }
             }
         }
-        cout << flush;
+        cout << flush; // clear the buffer of the screen in case cout missed some characters it forces it to print them somehow i think
     }

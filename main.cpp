@@ -9,11 +9,16 @@ using namespace std;
 
 int main(){
     cout << "program started!" << endl;
+    //required for the terminal
     init_console();
     hideCursor();
+    //define screen object(has all the array of objects)
     Screen mainscreen;
+    //define a player object with startx starty postions and keys at this order: right down left up stay dispose item
     player p1(5,5,"dxawse");
+    //clear the screen and draw from the arrays in mainscreen object(by default has walls but can decide to not draw them)
     mainscreen.draw();
+    //main loop handles key checking and delay for constant fps(mostly)
     while (1){
         showfps();
         if (check_kbhit()){

@@ -33,6 +33,6 @@ class Screen{
         Screen();
         void drawDefaultWalls();
         object* getatxy(const int x,const int y);
-        void setatxy(const int x, const int y,object* obj);
+        void setatxy(const int x, const int y,const object* obj);
         void draw();
 };
