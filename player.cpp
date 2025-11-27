@@ -70,7 +70,7 @@ void player::keyCheck(char key=0){ // keyc - key char
                 vy =vy == -1 ? 0 :1;
                 break;
             case movement::down:
-                vy=-vy == 1 ? 0 :-1;
+                vy=vy == 1 ? 0 :-1;
                 break;
             case movement::left:
                 vx=vx==1?0:-1;
