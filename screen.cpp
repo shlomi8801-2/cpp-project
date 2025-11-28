@@ -1,5 +1,5 @@
-// #pragma once
 #include "console.h"
+#include <cstddef>
 #include <iostream>
 #include "screen.h"
 #include "console.h"
@@ -22,6 +22,19 @@ void object::showinfo(){
         int idx = y*width+x;
         return idx>=0 && idx <=height*width ?&(objarr[idx]) : nullptr;
     }
+
+    void Screen::draw_static(const char* layout[], size_t lines) {
+        clrscr();
+        for (size_t y = 0; y < lines && y < height; y++) {
+            gotoxy(startx, starty + y);
+
+            for (size_t x = 0; layout[y][x] != '\0' && x < width; x++) {
+                cout << layout[y][x];
+            }
+        }
+        cout.flush();
+    }
+
     void Screen::drawDefaultWalls(){
         //simple walls
         for (int i=0;i<width;i++){
@@ -64,7 +77,14 @@ void object::showinfo(){
         cout << flush; // clear the buffer of the screen in case cout missed some characters it forces it to print them somehow i think
     }
     bool Screen::canMove(const int x,const int y){
-        //on the start of the screen ofc(no need to add)
-        cout<<y;
         return !((x>=0 && y>=0&&x<=width &&y<=-height)||getatxy(x,y)->getfilled()); // y is -height because the screen starts at 0 0 and shows at x -y
+    }
+
+    void Screen::clearScreen() {
+        // Resets ALL objects in memory
+        for (int i = 0; i < height * width; i++) {
+            objarr[i].setSprite(' ');
+            objarr[i].setvisible(false);
+            objarr[i].setfilled(false);
+        }
     }

@@ -1,6 +1,9 @@
 #pragma once
-class player;
 #include "player.h"
+#include <cstddef>
+
+class player;
+
 class object{
     int x;
     int y;
@@ -35,4 +38,6 @@ class Screen{
         void setatxy(const int x, const int y,const object* obj);
         void draw();
         bool canMove(const int x,const int y);
+        void draw_static(const char* layout[], size_t lines);
+        void clearScreen();
 };
