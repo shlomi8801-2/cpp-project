@@ -16,6 +16,12 @@ player::player(int _x,int _y,char const keys[],Screen* _grid){
     //copying the keys to an array stored in the player object
         controlKeys[i] = keys[i];
 }
+void player::pickupItem(object* onblock){
+    //if its pickable make a copy of it in the heap and store it in the player's inventory
+        this->inv = new object(*onblock);
+        grid->setatxy(x,y,&blocks::Air);
+        grid->updateLegend();
+    };
 
 void player::move(){
     //erase the previous player char by getting the block the player is on and checking if its visible if true draw it if not draw blank(space)
@@ -33,17 +39,15 @@ void player::move(){
     y -= grid->canMoveTo(x,y-vy)?vy:0; //y starts at 0 and goes to negative numbers in the screen
 
     //gets the block it stands on now
-    onblock = grid->getatxy(40,8);
+    onblock = grid->getatxy(x,y);
     if (onblock->isAir()){
+        //if the block standing on is just air there is not much to do with it so skip the checks by returning
         return;
     }
-    //if its pickable make a copy of it in the heap and store it in the player's inventory
+    
     if (onblock->getPickable()){
-        this->inv = new object(*onblock);
-        grid->setatxy(x,y,&blocks::Air);
+        pickupItem(onblock);
     }
-    //TODO make function to check if can move to in screen class - done
-
 }
 
 //just changes the way controls work(betterkeys just add the option to stop moving by trying to move the opposite direction)

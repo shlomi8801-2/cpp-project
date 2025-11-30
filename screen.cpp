@@ -35,7 +35,7 @@ using namespace std;
         }
         cout.flush();
     }
-    
+
 void object::set(const object& _obj){
     //does not copy x and y values
     this->filled = _obj.filled;
@@ -81,6 +81,8 @@ void object::set(const object& _obj){
                 }
             }
         }
+        //don't forget to draw the legend first
+        updateLegend();
         cout << flush; // clear the buffer of the screen in case cout missed some characters it forces it to print them somehow i think
     }
     bool Screen::canMoveTo(const int x,const int y){
@@ -93,3 +95,12 @@ void object::set(const object& _obj){
             objarr[i].set(' ',false,false);
         }
     }
+void Screen::updateLegend(){
+    //inventory for each player in parr
+    //health points for each one
+    //hints
+    //etc
+    //its displayed in the bottom of the screen with width * legendHeight size
+    gotoxy(startx,starty+gameHeight);
+    cout << "inventory:" << parr[0]->getInv()->getSprite();
+}

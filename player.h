@@ -26,4 +26,6 @@ class player{
     void move();
     void keyCheck(char key);
     void draw();
+    inline object* getInv() {return inv;}
+    void pickupItem(object* onblock);
 };

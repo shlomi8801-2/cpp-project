@@ -1,6 +1,6 @@
 #pragma once
 #include "player.h"
-#include <cstddef>
+#include <cstddef> // for size_t and other standard c things
 
 class player;
 
@@ -50,6 +50,7 @@ class object{
         inline void set(char _sprite,bool _filled, bool _visible) {Sprite = _sprite; filled=_filled; visible = _visible;}
         object(const object& _obj) { this->set(_obj);}
 };
+
 class Screen{
     int startx=0;
     int starty=1;
@@ -71,4 +72,6 @@ class Screen{
         bool canMoveTo(const int x,const int y);
         void draw_static(const char* layout[], size_t lines);
         void clearScreen();
+        void updateLegend(); // also draws it
+        inline void setPlayer(unsigned char idx,player* p) {if (idx>2) return; parr[idx] = p;}
 };
