@@ -55,6 +55,9 @@ class Screen{
     int starty=1;
     const int width = 80;
     const int height = 25;
+    const int legendHeight = 3;
+    int gameWidth = 80;
+    int gameHeight = height-legendHeight;
     object* objarr;
     player* parr[2];
     public:
