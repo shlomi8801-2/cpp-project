@@ -39,8 +39,5 @@ void showfps(){
     gotoxy(x,y);
     std::cout << getfps()<<std::flush;
 }
-void debug_log(){
-    //use before writing a debug msg
-    gotoxy(0,10);
-}
+
 #endif

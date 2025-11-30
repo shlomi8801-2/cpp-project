@@ -46,7 +46,7 @@ void player::move(){
     }
     
     if (onblock->getPickable()){
-        pickupItem(onblock);
+        pickupItem(onblock); // no need to send but it takes one less call to getatxy might add it in the pickupItem func later
     }
 }
 
