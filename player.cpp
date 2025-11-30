@@ -20,9 +20,12 @@ void player::move(){
     //erase the previous player char by getting the block the player is on and checking if its visible if true draw it if not draw blank(space)
     object* onblock = grid->getatxy(x,y);
     DrawAt(grid->getstartx()+x,grid->getstarty()+y,onblock->getvisible() ? onblock->getSprite(): ' ');
+    
+
+    //to check:
     //currently the blocking will only work for 1 cord at a time
-    x += grid->canMove(x+vx,y)?vx:0;
-    y -= grid->canMove(x,y-vy)?vy:0; //y starts at 0 and goes to negative numbers in the screen
+    x += grid->canMoveTo(x+vx,y)?vx:0;
+    y -= grid->canMoveTo(x,y-vy)?vy:0; //y starts at 0 and goes to negative numbers in the screen
     
     //TODO make function to check if can move to in screen class - done
 

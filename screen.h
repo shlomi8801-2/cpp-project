@@ -62,7 +62,7 @@ class Screen{
         object* getatxy(const int x,const int y);
         void setatxy(const int x, const int y,const object* obj);
         void draw();
-        bool canMove(const int x,const int y);
+        bool canMoveTo(const int x,const int y);
         void draw_static(const char* layout[], size_t lines);
         void clearScreen();
 };

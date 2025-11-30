@@ -3,6 +3,8 @@
 #include <iostream>
 #include "screen.h"
 #include "console.h"
+#include "blocks.h"
+
 using namespace std;
 //use array to store the screen background and have another array for players to draw    
 
@@ -47,20 +49,12 @@ void object::set(const object& _obj){
     void Screen::drawDefaultWalls(){
         //simple walls
         for (int i=0;i<width;i++){
-            objarr[i].setSprite('#');
-            objarr[i].setfilled(true);
-            objarr[i].setvisible(true);
-            objarr[(height-1)*width+i].setSprite('#');
-            objarr[(height-1)*width+i].setfilled(true);
-            objarr[(height-1)*width+i].setvisible(true);
+            objarr[i].set(blocks::Wall);
+            objarr[(height-1)*width+i].set(blocks::Wall);
         }
         for (int i=1;i<height-1;i++){
-            objarr[width*i].setSprite('#');
-            objarr[width*i].setvisible(true);
-            objarr[width*i].setfilled(true);
-            objarr[width*i+width-1].setSprite('#');
-            objarr[width*i+width-1].setvisible(true);
-            objarr[width*i+width-1].setfilled(true);
+            objarr[width*i].set(blocks::Wall);
+            objarr[width*i+width-1].set(blocks::Wall);
         }
     }
     void Screen::setatxy(const int x, const int y,const object* obj){
@@ -85,7 +79,7 @@ void object::set(const object& _obj){
         }
         cout << flush; // clear the buffer of the screen in case cout missed some characters it forces it to print them somehow i think
     }
-    bool Screen::canMove(const int x,const int y){
+    bool Screen::canMoveTo(const int x,const int y){
         return !((x>=0 && y>=0&&x<=width &&y<=-height)||getatxy(x,y)->getfilled()); // y is -height because the screen starts at 0 0 and shows at x -y
     }
 
