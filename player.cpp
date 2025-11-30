@@ -35,19 +35,23 @@ void player::keyCheck(char key=0){ // keyc - key char
     for (i=0;i<6;i++){
         if (controlKeys[i]==key)
         {
-            switch (i)
+            switch (i)//after each key reset the other axis velocity for it to not move diagonally
         {
             case movement::up:
                 vy =1;
+                vx = 0;
                 break;
             case movement::down:
                 vy=-1;
+                vx=0;
                 break;
             case movement::left:
                 vx=-1;
+                vy=0;
                 break;
             case movement::right:
                 vx=1;
+                vy=0;
                 break;
             case movement::stay:
                 vx = vy = 0;
