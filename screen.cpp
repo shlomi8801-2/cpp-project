@@ -6,9 +6,6 @@
 using namespace std;
 //use array to store the screen background and have another array for players to draw    
 
-void object::showinfo(){
-    cout << "x:"<<x<<"\ny:"<<y<<"\nsprite:\'"<<Sprite<<"\'\nfilled:"<<visible;
-}
     Screen::Screen(){
         int maxidx = height*width;
         //like that every 80 characters is a row in the screen so if you for example want to get 1,1 pos you need 80*1+1 in the array
@@ -34,6 +31,18 @@ void object::showinfo(){
         }
         cout.flush();
     }
+void object::set(const object& _obj){
+    //does not copy x and y values
+    this->filled = _obj.filled;
+    this->Sprite = _obj.Sprite;
+    this->visible = _obj.visible;
+
+    this->type=_obj.type;
+    this->doorId = _obj.doorId;
+    this->keyId = _obj.keyId;
+    this->switchId = _obj.switchId;
+    this->riddleId = _obj.riddleId;
+}
 
     void Screen::drawDefaultWalls(){
         //simple walls
@@ -83,8 +92,6 @@ void object::showinfo(){
     void Screen::clearScreen() {
         // Resets ALL objects in memory
         for (int i = 0; i < height * width; i++) {
-            objarr[i].setSprite(' ');
-            objarr[i].setvisible(false);
-            objarr[i].setfilled(false);
+            objarr[i].set(' ',false,false);
         }
     }

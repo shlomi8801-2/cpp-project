@@ -19,11 +19,11 @@ namespace levels {
 		for (int y = 5; y <= 7; y++) {
 			object* obj = screen->getatxy(40, y);
 			if (obj != nullptr) {
-				obj->setSprite('|');
-				obj->setvisible(true);
-				obj->setfilled(true);
+				obj->set('|',true,true);
 			}
 		}
+		object* obj = screen->getatxy(40, 8);
+		
 
 		screen->draw();
 	}

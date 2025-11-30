@@ -1,14 +1,11 @@
 #pragma once
 class Screen;
 #include "screen.h"
-class item{
-
-};
 
 
 class player{
     char controlKeys[6];
-    item* inv;
+    object inv;
     int vx =0;//velocity at x axis
     int vy=0; //velocity at y axis
     int x;
