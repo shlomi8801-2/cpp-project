@@ -6,4 +6,5 @@ namespace blocks {
     const object Wall = object('#',true,false,true);
     const object Switch = object('/',false,true,false,4);
     const object Obstacle = object('*',true,true,false,5);
+    const object Air = object(' ',false,false,false);
 }

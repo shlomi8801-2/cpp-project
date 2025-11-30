@@ -25,6 +25,8 @@ namespace levels {
 			}
 		}
 		object* obj = screen->getatxy(40, 8);
+		obj->set(blocks::Bomb);
+		obj->setPickable(true); // for some reason it doesnt work without adding it(it stays false)
 		
 
 		screen->draw();

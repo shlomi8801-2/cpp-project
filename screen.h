@@ -17,7 +17,7 @@ class object{
     // }
     //for the future(if needed) all of the block types in the game after all are less then 256 possibilites so can store in a unsigned char like so: type - door/wall/key/bomb/switch/obstacle/riddle/torch/spring sum: 8+1+8+1+32(possible button id's)+1+32(num of riddles) 1+1=85 = 0101 0101
     //but for now use alot of variables for readability
-    int type=0; //0 - general/wall, 1 - door, 2 - key, 3 - bomb, 4 - switch, 5 - obstacle, 6 - riddle, 7 - torch, 8 - spring
+    int type=0; //0 - air/general/wall, 1 - door, 2 - key, 3 - bomb, 4 - switch, 5 - obstacle, 6 - riddle, 7 - torch, 8 - spring
     int doorId;
     int keyId;
     int switchId;
@@ -44,6 +44,9 @@ class object{
         void setvisible(bool state){visible = state;}
         void setfilled(bool state){filled = state;}
         void set(const object& _obj);
+        bool getPickable(){return pickable;}
+        void setPickable(bool state){pickable = state;}
+        inline bool isAir() {return (Sprite==' ') && (filled = false);}
         inline void set(char _sprite,bool _filled, bool _visible) {Sprite = _sprite; filled=_filled; visible = _visible;}
         object(const object& _obj) { this->set(_obj);}
 };

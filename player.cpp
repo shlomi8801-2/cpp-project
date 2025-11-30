@@ -1,7 +1,8 @@
 #include "player.h"
 #include "utils.h"
 #include "screen.h"
-
+#include "blocks.h"
+#include <iostream>
 
 
 //dont use it its for debug just different way of using the keys
@@ -23,10 +24,24 @@ void player::move(){
     
 
     //to check:
+    // - the can walk on the block in front
+    // - special for obstacle: calculate the force needed to move it
+    // - if the item in front is pickable and inventory is empty pick it up    
+
     //currently the blocking will only work for 1 cord at a time
     x += grid->canMoveTo(x+vx,y)?vx:0;
     y -= grid->canMoveTo(x,y-vy)?vy:0; //y starts at 0 and goes to negative numbers in the screen
-    
+
+    //gets the block it stands on now
+    onblock = grid->getatxy(40,8);
+    if (onblock->isAir()){
+        return;
+    }
+    //if its pickable make a copy of it in the heap and store it in the player's inventory
+    if (onblock->getPickable()){
+        this->inv = new object(*onblock);
+        grid->setatxy(x,y,&blocks::Air);
+    }
     //TODO make function to check if can move to in screen class - done
 
 }

@@ -57,6 +57,7 @@ void object::set(const object& _obj){
             objarr[width*i+width-1].set(blocks::Wall);
         }
     }
+    
     void Screen::setatxy(const int x, const int y,const object* obj){
         //if out of screen doing nothing
         int idx = y*width+x;
