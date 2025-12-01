@@ -30,6 +30,7 @@ int main(){
 
     // Start game
     player p1(5, 5, "dxawse", &mainscreen);
+    mainscreen.setPlayer(0,&p1);
     int currentLevel = 1;
     levels::changeLayout(currentLevel, &mainscreen);
 

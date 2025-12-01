@@ -9,7 +9,7 @@ Exercise 1:
 
   > must:
   > * two players
-  > * walls
+  > * ~~walls~~
   > * keys
   > * doors
   >

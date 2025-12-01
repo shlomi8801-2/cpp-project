@@ -1,4 +1,5 @@
 #include "Layouts.h"
+#include "blocks.h"
 
 // Maybe will be changed to a class later if neccessary. Didn't think it through yet.
 namespace levels {
@@ -19,11 +20,14 @@ namespace levels {
 		for (int y = 5; y <= 7; y++) {
 			object* obj = screen->getatxy(40, y);
 			if (obj != nullptr) {
-				obj->setSprite('|');
-				obj->setvisible(true);
-				obj->setfilled(true);
+				// obj->set('|',true,true);
+				obj->set(blocks::Wall);
 			}
 		}
+		object* obj = screen->getatxy(40, 8);
+		obj->set(blocks::Bomb);
+		obj->setPickable(true); // for some reason it doesnt work without adding it(it stays false)
+		
 
 		screen->draw();
 	}
