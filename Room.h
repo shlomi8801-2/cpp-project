@@ -16,6 +16,7 @@ struct Door {
 }
 
 class Room {
+		object* grid[MAX_X][MAX_Y];
 		int roomNum;
 		Screen* screen;
 		Door* doors;
@@ -39,3 +40,4 @@ public:
 	void setScreen(Screen* s) { screen = s; }
 	Door* Room::getDoorAt(int x, int y);
 };
+
