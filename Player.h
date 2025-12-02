@@ -14,21 +14,21 @@ struct PlayerKeyBinding {
     Action action;
 };
 
-static constexpr PlayerKeyBinding movements[] = {
+static const PlayerKeyBinding movements[] = {
     {'w', 1, Action::MOVE_UP},
     {'x', 1, Action::MOVE_DOWN},
     {'a', 1, Action::MOVE_LEFT},
     {'d', 1, Action::MOVE_RIGHT},
+    {'s', 1, Action::STAY},
     {'i', 2, Action::MOVE_UP},
     {'m', 2, Action::MOVE_DOWN},
-    {'j', 2, Action::MOVE_LEFT },
-    {'l', 2, Action::MOVE_RIGHT}
+    {'j', 2, Action::MOVE_LEFT},
+    {'l', 2, Action::MOVE_RIGHT},
+    {'k', 2, Action::STAY}
 };
 
-static constexpr PlayerKeyBinding actions[] = {
-    {'s', 1, Action::STAY},
+static const PlayerKeyBinding actions[] = {
     {'e', 1, Action::DROP_ITEM},
-    {'k', 2, Action::STAY},
     {'o', 2, Action::DROP_ITEM},
 };
 
@@ -69,21 +69,22 @@ class Player {
 
 public:
     Player::Player(Point _pos, object* _inv, int ID;)
-		: pos(_pos), inv(nullptr), playerId(ID)
+        : pos(_pos), inv(nullptr), playerId(ID)
     {
-    }
-    Player::~Player() { delete inv; }
+    };
+    Player::~Player() { delete inv; };
 
-    Point getPosition() const { return pos; }
-    int getX() const { return pos.x; }
-    int getY() const { return pos.y; }
-    object* getInv() { return inv; }
-    char getSprite() const { return pos.sprite; }
+	void static handleInput();
+    Point getPosition() const { return pos; };
+    int getX() const { return pos.x; };
+    int getY() const { return pos.y; };
+    object* getInv() { return inv; };
+    char getSprite() const { return pos.sprite; };
 
-    void setPosition(int x, int y) { pos.x = x; pos.y = y; }
-    void setPosition(Point newPos) { pos = newPos; }
+    void setPosition(int x, int y) { pos.x = x; pos.y = y; };
+    void setPosition(Point newPos) { pos = newPos; };
     
-    void Player::move();
+    void move();
     void moveTo(int x, int y) { setPosition(x, y); } // In case we need it
     void draw() { pos.draw(); }
     void pickupItem(object* item) {

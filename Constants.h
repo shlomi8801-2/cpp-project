@@ -19,7 +19,12 @@ enum class Direction {
 };
 
 enum class Action {
-    DROP_ITEM,
+	MOVE_UP,
+	MOVE_DOWN,
+	MOVE_LEFT,
+	MOVE_RIGHT,
+	STAY,
+	DROP_ITEM,
 	ESC = 27
 };
 
