@@ -102,14 +102,33 @@ void Game::initialize() {
 	player2 = new Player(Point(10, 5, 0, 0, 'B'), nullptr, 2);
 }
 
-
-
 void changeRoom(int newRoomId, int spawnX, int spawnY) {
 	currentRoomId = newRoomId;
 	game.rooms[newRoomId]->activate();
 	player1->setPosition(spawnX, spawnY);
 	player2->setPosition(spawnX + 2, spawnY);
 }
+
+void static handleInput() {
+
+	if (check_kbhit()) {
+		char pressed = get_single_char();
+
+		if (pressed == Action::ESC) {
+			// Open Pause Menu
+
+			return;
+		}
+		else {
+			for (static constexpr PlayerKeyBinding& binding : ::actions) {
+				if (binding.key == pressed) {
+					Player::performAction(binding.playerID, binding.action);
+					return;
+				}
+			}
+		}
+	}
+};
 
 void gameLoop(Game& game) {
 	// Main game loop
@@ -118,6 +137,8 @@ void gameLoop(Game& game) {
 		Player::handleInput();
 
 		game.player1->move();
+		game.player2->move();
+
 		game.currentScreen->draw();
 	}
 }

@@ -31,4 +31,5 @@ public:
 	void static Player::handleInput();
 
 	void Game::initialize();
+	void changeRoom(int newRoomId, int spawnX, int spawnY)
 };
