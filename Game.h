@@ -27,9 +27,9 @@ public:
 	void setState(gameState newState) { currentState = newState };
 	gameState getState() const { return currentState };
 
-	void static Game::launchGame();
-	void static Player::handleInput();
+	static void Game::launchGame();
+	static void Player::handleInput();
 
 	void Game::initialize();
-	void changeRoom(int newRoomId, int spawnX, int spawnY)
+	void Game::changeRoom(int newRoomId, int spawnX, int spawnY)
 };

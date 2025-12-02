@@ -31,7 +31,7 @@ Game::~Game() {
 	}
 };
 
-void static Game::launchGame() {
+static void Game::launchGame() {
 
 	Game newGame;
 	gameState& currState = newGame.currentState;
@@ -102,14 +102,14 @@ void Game::initialize() {
 	player2 = new Player(Point(10, 5, 0, 0, 'B'), nullptr, 2);
 }
 
-void changeRoom(int newRoomId, int spawnX, int spawnY) {
-	currentRoomId = newRoomId;
-	game.rooms[newRoomId]->activate();
+void Game::changeRoom(int newRoomId, int spawnX, int spawnY) {
+	currRoomId = newRoomId;
+	rooms[newRoomId]->activate();
 	player1->setPosition(spawnX, spawnY);
 	player2->setPosition(spawnX + 2, spawnY);
 }
 
-void static handleInput() {
+static void handleInput() {
 
 	if (check_kbhit()) {
 		char pressed = get_single_char();
@@ -133,6 +133,7 @@ void static handleInput() {
 void gameLoop(Game& game) {
 	// Main game loop
 	while (game.currentState == gameState::inGame) {
+		
 		// Handle player input
 		Player::handleInput();
 
@@ -140,6 +141,8 @@ void gameLoop(Game& game) {
 		game.player2->move();
 
 		game.currentScreen->draw();
+
+		sleep_ms(50); // Control game speed
 	}
 }
 
