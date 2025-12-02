@@ -2,7 +2,6 @@
 #include "Console.h"
 #include <cstddef>
 #include <iostream>
-#include "Screen.h"
 #include "Blocks.h"
 #include "Player.h"
 #include <cstddef> // for size_t and other standard c things
