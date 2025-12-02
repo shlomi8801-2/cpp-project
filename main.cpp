@@ -1,7 +1,7 @@
-#include "console.h"
-#include "utils.h"
-#include "screen.h"
-#include "player.h"
+#include "Console.h"
+#include "Utils.h"
+#include "Screen.h"
+#include "Player.h"
 #include "Layouts.h"
 #include "MainMenu.h"
 
@@ -14,6 +14,11 @@ int main(){
     init_console();
     hideCursor();
 
+    Game launchGame();
+    return 0;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     Screen mainscreen;
 
     // Show main menu first
@@ -23,13 +28,8 @@ int main(){
 	// I want to move this to MainMenu namespace but for now its ok here
 	// Also I want to add instructions screen later
 
-    if (choice == 3) {
-        // Quit
-        return 0;
-    }
-
     // Start game
-    player p1(5, 5, "dxawse", &mainscreen);
+    Player p1(5, 5, "dxawse", &mainscreen);
     mainscreen.setPlayer(0,&p1);
     int currentLevel = 1;
     levels::changeLayout(currentLevel, &mainscreen);

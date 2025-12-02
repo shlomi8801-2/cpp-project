@@ -1,9 +1,5 @@
-#include "console.h"
-#include <cstddef>
-#include <iostream>
-#include "screen.h"
-#include "console.h"
-#include "blocks.h"
+#include "Screen.h"
+
 
 using namespace std;
 //use array to store the screen background and have another array for players to draw    
@@ -51,13 +47,13 @@ void object::set(const object& _obj){
 
     void Screen::drawDefaultWalls(){
         //simple walls
-        for (int i=0;i<gameWidth;i++){
-            objarr[i].set(blocks::Wall);
-            objarr[(gameHeight-1)*gameWidth+i].set(blocks::Wall);
+        for (int i = 0;i < gameWidth; i++){
+            objarr[i].set(Blocks::Wall);
+            objarr[(gameHeight-1)*gameWidth+i].set(Blocks::Wall);
         }
-        for (int i=1;i<gameHeight-1;i++){
-            objarr[gameWidth*i].set(blocks::Wall);
-            objarr[gameWidth*i+gameWidth-1].set(blocks::Wall);
+        for (int i = 1 ;i < gameHeight-4; i++){
+            objarr[gameWidth*i].set(Blocks::Wall);
+            objarr[gameWidth*i+gameWidth-1].set(Blocks::Wall);
         }
     }
 
@@ -104,3 +100,24 @@ void Screen::updateLegend(){
     gotoxy(startx,starty+gameHeight);
     cout << "inventory:" << parr[0]->getInv()->getSprite();
 }
+
+void drawDefaultWalls() {
+
+    for (int i = 0; i < ScreenSize::MAX_X; i++) {
+        DrawAt(i, 0, '#');
+        DrawAt(i, 20, '#');
+	}
+    for (int i = 1; i < ScreenSize::MAX_Y - 6; i++) {
+        DrawAt(0, i, '#');
+        DrawAt(79, i, '#');
+	}
+}
+
+char Screen::getCharAt(const Point& p) const {
+    return screen[p.getY()][p.getX()];
+}
+
+bool isWall(const Point& p) const {
+    return getCharAt(p) == '#';
+}
+

@@ -1,7 +1,7 @@
-#ifndef utils
-#define utils
+#ifndef Utils
+#define Utils
 
-#include "console.h"
+#include "Console.h"
 #include <ctime>
 
 using std::cout, std::flush, std::time;

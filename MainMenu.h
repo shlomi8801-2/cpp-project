@@ -1,7 +1,18 @@
 #pragma once
-#include "screen.h"
+#include "Console.h"
+#include <iostream>
+#include "Screen.h"
+#include "Game.h"
 
 namespace mainmenu {
-    void showMainMenu(Screen* screen);
-    int getMenuChoice(); 
+	void showMainMenu(Screen* screen) {
+		screen->draw_static(MAIN_MENU, 25);
+	}
+
+	void showInstructions(Screen* screen) {
+		screen->draw_static(INSTRUCTIONS, 25);
+	}
+
+    void static handleMainMenuChoice(gameState& state);
+	void static handleInstructionsChioce(gameState& state);
 }

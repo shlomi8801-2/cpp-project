@@ -1,5 +1,5 @@
 #include "Layouts.h"
-#include "blocks.h"
+#include "Blocks.h"
 
 // Maybe will be changed to a class later if neccessary. Didn't think it through yet.
 namespace levels {
@@ -21,11 +21,11 @@ namespace levels {
 			object* obj = screen->getatxy(40, y);
 			if (obj != nullptr) {
 				// obj->set('|',true,true);
-				obj->set(blocks::Wall);
+				obj->set(Blocks::Wall);
 			}
 		}
 		object* obj = screen->getatxy(40, 8);
-		obj->set(blocks::Bomb);
+		obj->set(Blocks::Bomb);
 		obj->setPickable(true); // for some reason it doesnt work without adding it(it stays false)
 		
 

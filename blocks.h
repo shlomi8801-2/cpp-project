@@ -1,7 +1,7 @@
 #pragma once
-#include "screen.h"
+#include "Screen.h"
 
-namespace blocks {
+namespace Blocks {
     //added to copy default blocks with copy constructor
     const object Bomb = object('@',false,true,true,3);
     const object Wall = object('#',true,false,true);
