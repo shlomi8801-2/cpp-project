@@ -131,7 +131,7 @@ void Player::move() {
     Point currLoc = pos;
     pos.move();
     if (screen.isWall(pos)) {
-        pos = body0orig; // Revert to original position if out of bounds
+        pos = currLoc; // Revert to original position if out of bounds
     }
     pos.draw();
 }

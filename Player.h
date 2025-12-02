@@ -65,11 +65,11 @@ class object;
 class Player {
 	Point pos;
     object* inv;
-    char sprite;
+    int playerId;
 
 public:
-    Player::Player(Point _pos, object* _inv, char _sprite)
-        : pos(_pos), inv(nullptr), sprite(_sprite)
+    Player::Player(Point _pos, object* _inv, int ID;)
+		: pos(_pos), inv(nullptr), playerId(ID)
     {
     }
     Player::~Player() { delete inv; }
@@ -78,14 +78,14 @@ public:
     int getX() const { return pos.x; }
     int getY() const { return pos.y; }
     object* getInv() { return inv; }
-    char getSprite() const { return sprite; }
+    char getSprite() const { return pos.sprite; }
 
     void setPosition(int x, int y) { pos.x = x; pos.y = y; }
     void setPosition(Point newPos) { pos = newPos; }
     
     void Player::move();
     void moveTo(int x, int y) { setPosition(x, y); } // In case we need it
-    void draw() { pos.draw(sprite); }
+    void draw() { pos.draw(); }
     void pickupItem(object* item) {
         if (item != nullptr) {
             addToInventory(*item);

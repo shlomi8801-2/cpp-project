@@ -5,8 +5,8 @@ Levels::Levels(Screen& screen, gameState& state)
     for (int i = 0; i < MAX_ROOMS; i++) {
         rooms[i] = nullptr;
     }
-	Player& player1 = ;
-	Player& player2 = ;
+	Player* player1 = nullptr;
+	Player* player2 = nullptr;
 };
 
 Levels::~Levels() {

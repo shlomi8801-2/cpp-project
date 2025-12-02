@@ -3,7 +3,6 @@
 #include "Screen.h"
 #include "Item.h"
 #include "Constants.h"
-#include "Levels.h"
 #include "Room.h"
 
 class Game {
@@ -14,7 +13,11 @@ class Game {
 	// This is because if the players move to a new screen and then return, we want to preserve the screen state.
 	Screen* currentScreen;
 
-	Levels* levels;
+	Room* rooms[3];
+	int currRoomId; 
+
+	Player* player1;
+	Player* player2;
 
 public:
 

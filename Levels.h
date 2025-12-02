@@ -27,3 +27,7 @@ public:
     void handlePlayerMovement(int newX, int newY);
     void playerPickupItem(int x, int y);
 };
+
+void setPlayer(Player* p) {
+    player = p;
+}

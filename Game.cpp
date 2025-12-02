@@ -5,17 +5,29 @@ enum class gameState;
 
 // Constructor and Destructor
 Game::Game() {
-	currentState = mainMenu;
+	currentState = gameState::mainMenu;
 	currentScreen = new Screen;
-	levels = nullptr;
+	rooms[3] = nullptr;
+	currRoomId = -1;
+
+	player1 = nullptr;
+	player2 = nullptr;
 };
 
 Game::~Game() {
 	if (currentScreen != nullptr) {
 		delete currentScreen;
 	}
-	if (currentLevelItems != nullptr) {
-		delete currentLevelItems;
+	for (Game& room : rooms) {
+		if room != nullptr {
+			delete room;
+		}
+	}
+	if (player1 != nullptr) {
+		delete player1;
+	}
+	if (player2 != nullptr) {
+		delete player2;
 	}
 };
 
@@ -74,9 +86,20 @@ void static Game::launchGame() {
 
 void Game::initialize() {
 
-	levels = new Levels(*currentScreen, currentState);
 	rooms[0] = new Room(0);
+	rooms[1] = new Room(1);
+	rooms[2] = new Room(2);
 
+	for (int i = 0; i < 3; i++) {
+		rooms[i]->setScreen(screen);
+		rooms[i]->initializeDefault();
+	}
+
+	currentRoomIndex = 0;
+	rooms[0]->activate();
+
+	player1 = new Player(Point(5, 5, 0, 0, 'A'), nullptr, 1);
+	player2 = new Player(Point(10, 5, 0, 0, 'B'), nullptr, 2);
 }
 
 void static Player::handleInput() {
@@ -90,7 +113,7 @@ void static Player::handleInput() {
 			return;
 		}
 		else {
-			for (static constexpr PlayerKeyBinding& binding : movements) {
+			for (const PlayerKeyBinding& binding : movements) {
 				if (binding.key == pressed) {
 					Player::movePlayer(binding.playerID, binding.action);
 					return;
@@ -105,3 +128,25 @@ void static Player::handleInput() {
 		}
 	}
 };
+
+void changeRoom(int newRoomId, int spawnX, int spawnY) {
+	currentRoomId = newRoomId;
+	game.rooms[newRoomId]->activate();
+	player1->setPosition(spawnX, spawnY);
+	player2->setPosition(spawnX + 2, spawnY);
+}
+
+void gameLoop(Game& game) {
+	// Main game loop
+	while (game.currentState == gameState::inGame) {
+		// Handle player input
+		Player::handleInput();
+
+		game.levels->Player1.move();
+		// Update game state
+		// ...
+		// Render screen
+		game.currentScreen->draw();
+	}
+}
+
