@@ -10,6 +10,6 @@ namespace levels
 
     // Helper to load by number
     void changeLayout(int levelNum, Screen *screen);
-    void generateLayoutFromArr(const char* arr[MAX_X], Object outArr[][22]);
+    void generateLayoutFromArr(const char* arr[MAX_Y-LEGEND_HEIGHT], Screen* screen);
 }
 

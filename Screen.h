@@ -66,11 +66,11 @@ class Screen
     const int legendHeight = ScreenSize::LEGEND_HEIGHT;
     const int gameWidth = ScreenSize::MAX_X;
     const int gameHeight = ScreenSize::MAX_Y - legendHeight;
-    
+    Object objarr[ScreenSize::MAX_X][ScreenSize::MAX_Y-3];
     Player *parr[2];
 
 public:
-    Object objarr[ScreenSize::MAX_X][ScreenSize::MAX_Y-3];
+    
     inline int getstartx() { return startx; }
     inline int getstarty() { return starty; }
     Screen();

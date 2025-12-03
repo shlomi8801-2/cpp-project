@@ -29,8 +29,7 @@ namespace levels
 		"W                                                                             W", // 18
 		"W                                                                             W", // 19
 		"W                                                                             W", // 20
-		"W                                                                             W", // 21
-		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" // 22
+		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" // 21
 	};
 
 	// Not working properly yet
@@ -52,7 +51,7 @@ namespace levels
 	}
 	void level2(Screen *screen){
 		screen->clearScreen();
-		generateLayoutFromArr(level2map,screen->objarr);
+		generateLayoutFromArr(level2map,screen);
 		screen->draw();
 	}
 	void level1(Screen *screen)
@@ -75,7 +74,7 @@ namespace levels
 
 		screen->draw();
 	}
-	void generateLayoutFromArr(const char* arr[MAX_Y-LEGEND_HEIGHT], Object outArr[][22])
+	void generateLayoutFromArr(const char* arr[MAX_Y-LEGEND_HEIGHT], Screen* screen)
 	{
 		// takes an array like the main menu and generates array of objects from the objects being saved chars for example: @ = bomb
 		// torch - !
@@ -88,28 +87,29 @@ namespace levels
 		// key - K
 		// Riddle ?
 		//outArr MUST be enough in size!
-		for (int y=0;y<22;y++)
+		for (int y=0;y<MAX_Y-LEGEND_HEIGHT;y++)
 		for (int x=0;x<MAX_X;x++){
-			std::cout<<arr[x][y];
-			// switch (arr[x][y]){
-			// 	case '@':
-			// 		outArr[x][y].set(Blocks::Bomb);
-			// 		break;
-			// 	case 'W':
-			// 		outArr[x][y].set(Blocks::Wall);
-			// 		break;
-			// 	case '*':
-			// 		outArr[x][y].set(Blocks::Obstacle);
-			// 		break;
-			// 	case '/':
-			// 		outArr[x][y].set(Blocks::Switch);
-			// 		break;
-			// 	case ' ':
-			// 		outArr[x][y].set(Blocks::Air);
-			// 		break;
-			// 	default:
-			// 		outArr[x][y].set(arr[x][y],true,true);
-			// }
+			// std::cout<<(screen->getatxy(x,1))->getSprite()<<x<<std::flush;
+			switch (arr[y][x]){ // idk why its backwards maybe because
+				case '@':
+					(screen->getatxy(x,y))->set(Blocks::Bomb);
+					break;
+				case 'W':
+					(screen->getatxy(x,y))->set(Blocks::Wall);
+					break;
+				case '*':
+					(screen->getatxy(x,y))->set(Blocks::Obstacle);
+					break;
+				case '/':
+					(screen->getatxy(x,y))->set(Blocks::Switch);
+					break;
+				case ' ':
+					(screen->getatxy(x,y))->set(Blocks::Air);
+					break;
+				default:
+					(screen->getatxy(x,y))->set(arr[y][x],true,true);
+					break;
+			}
 		}
 
 	}
