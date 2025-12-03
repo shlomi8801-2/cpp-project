@@ -1,12 +1,12 @@
-#include "player.h"
+#include "Player.h"
 #include "utils.h"
-#include "screen.h"
+#include "Screen.h"
 #include "Blocks.h"
 #include <iostream>
 
 // dont use it its for debug just different way of using the keys
 
-player::player(int _x, int _y, char const keys[], Screen *_grid)
+Player::Player(int _x, int _y, char const keys[], Screen *_grid)
 {
     x = _x;
     y = _y;
@@ -15,7 +15,7 @@ player::player(int _x, int _y, char const keys[], Screen *_grid)
         // copying the keys to an array stored in the player object
         controlKeys[i] = keys[i];
 }
-void player::pickupItem(Object *onblock)
+void Player::pickupItem(Object *onblock)
 {
     // if its pickable make a copy of it in the heap and store it in the player's inventory
     this->inv = new Object(*onblock);
@@ -23,7 +23,7 @@ void player::pickupItem(Object *onblock)
     grid->updateLegend();
 };
 
-void player::move()
+void Player::move()
 {
     // erase the previous player char by getting the block the player is on and checking if its visible if true draw it if not draw blank(space)
     Object *onblock = grid->getatxy(x, y);
@@ -54,7 +54,7 @@ void player::move()
 
 // just changes the way controls work(betterkeys just add the option to stop moving by trying to move the opposite direction)
 #ifndef betterkeys
-void player::keyCheck(char key = 0)
+void Player::keyCheck(char key = 0)
 { // keyc - key char
     int i;
     for (i = 0; i < 6; i++)
@@ -126,7 +126,7 @@ void player::keyCheck(char key = 0)
     }
 }
 #endif
-void player::draw()
+void Player::draw()
 {
     // because the player is only 1 char using DrawAt function
     DrawAt(grid->getstartx() + x, grid->getstarty() + y, sprite);

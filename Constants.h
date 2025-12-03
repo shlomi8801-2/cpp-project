@@ -34,5 +34,6 @@ enum Action
 enum ScreenSize
 {
 	MAX_X = 80,
-	MAX_Y = 25
+	MAX_Y = 25,
+	LEGEND_HEIGHT = 3
 };

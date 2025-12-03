@@ -1,7 +1,7 @@
 #include "console.h"
 #include <cstddef>
 #include <iostream>
-#include "screen.h"
+#include "Screen.h"
 #include "console.h"
 #include "Blocks.h"
 
@@ -106,7 +106,6 @@ void Screen::clearScreen()
     // Resets ALL objects in memory
     for (int y=0;y<gameHeight;y++)
     for (int i = 0; i < gameWidth; i++){
-         cout<<i<<","<<y<<flush;
         objarr[i][0].set(' ', false, false);
     }
 }

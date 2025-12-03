@@ -1,11 +1,11 @@
 #include "console.h"
 #include "utils.h"
-#include "screen.h"
-#include "player.h"
+#include "Screen.h"
+#include "Player.h"
 #include "Layouts.h"
 #include "MainMenu.h"
 
-#define fps 10
+#define FPS 10
 using namespace std;
 
 int main()
@@ -30,9 +30,9 @@ int main()
     }
 
     // Start game
-    player p1(5, 5, "dxawse", &mainscreen);
+    Player p1(5, 5, "dxawse", &mainscreen);
     mainscreen.setPlayer(0, &p1);
-    int currentLevel = 1;
+    int currentLevel = 2;
     levels::changeLayout(currentLevel, &mainscreen);
     while (1)
     {
@@ -44,7 +44,7 @@ int main()
         }
         p1.move();
         p1.draw();
-        sleep_ms((1.0 / fps) * 1000); // requires the 1.0 for it to stay not int
+        sleep_ms((1.0 / FPS) * 1000); // requires the 1.0 for it to stay not int
     }
     return 0;
 }

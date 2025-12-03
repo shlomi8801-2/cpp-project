@@ -1,9 +1,9 @@
 #pragma once
 class Screen;
 class Object;
-#include "screen.h"
+#include "Screen.h"
 
-class player
+class Player
 {
     char controlKeys[6];
     Object *inv; // when collecting an item make a copy of it in the heap and save it here after disposing copy it to the screen array and free it
@@ -24,7 +24,7 @@ class player
     };
 
 public:
-    player(int _x, int _y, char const keys[], Screen *_grid);
+    Player(int _x, int _y, char const keys[], Screen *_grid);
     void move();
     void keyCheck(char key);
     void draw();

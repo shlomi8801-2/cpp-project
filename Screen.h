@@ -1,8 +1,8 @@
 #pragma once
-#include "player.h"
+#include "Player.h"
 #include <cstddef> // for size_t and other standard c things
 #include "Constants.h"
-class player;
+class Player;
 
 class Object
 {
@@ -62,14 +62,15 @@ class Screen
 {
     gameState currState = gameState::mainMenu;
     int startx = 0;
-    int starty = 1;
-    const int legendHeight = 3;
+    int starty = 1; 
+    const int legendHeight = ScreenSize::LEGEND_HEIGHT;
     const int gameWidth = ScreenSize::MAX_X;
     const int gameHeight = ScreenSize::MAX_Y - legendHeight;
-    Object objarr[ScreenSize::MAX_X][ScreenSize::MAX_Y];
-    player *parr[2];
+    
+    Player *parr[2];
 
 public:
+    Object objarr[ScreenSize::MAX_X][ScreenSize::MAX_Y-3];
     inline int getstartx() { return startx; }
     inline int getstarty() { return starty; }
     Screen();
@@ -81,7 +82,7 @@ public:
     void draw_static(const char *layout[], size_t lines);
     void clearScreen();
     void updateLegend(); // also draws it
-    inline void setPlayer(unsigned char idx, player *p)
+    void setPlayer(unsigned char idx, Player *p)
     {
         if (idx > 2)
             return;
