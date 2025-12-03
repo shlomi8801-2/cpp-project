@@ -88,4 +88,6 @@ public:
             return;
         parr[idx] = p;
     }
+    void tick(); //game update
+    void keyCheck(char c);
 };

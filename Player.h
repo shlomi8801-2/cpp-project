@@ -24,10 +24,14 @@ class Player
     };
 
 public:
-    Player(int _x, int _y, char const keys[], Screen *_grid);
+
+    Player(int _x, int _y, char const keys[], Screen *_grid,char _sprite='a');
     void move();
     void keyCheck(char key);
     void draw();
     inline Object *getInv() { return inv; }
     void pickupItem(Object *onblock);
+    void tick();
 };
+
+

@@ -120,3 +120,18 @@ void Screen::updateLegend()
     Object* pinv = parr[0]->getInv(); // by default its set to 0 because its on the stack so check it to avoid using function on nullptr(0)
     cout << "inventory:" << (!pinv ? ' ' : pinv->getSprite()); // basically "if not pinv" to check if its nullptr == didn't work
 }
+void Screen::tick(){
+    for (Player* p : parr){
+        // cout << p<<flush;
+        
+        p->tick();
+    }
+    
+}
+void Screen::keyCheck(char c){
+    for (Player* p : parr){
+        // cout << p<<flush;
+        
+        p->keyCheck(c);
+    }
+}

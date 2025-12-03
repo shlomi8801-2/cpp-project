@@ -6,10 +6,11 @@
 
 // dont use it its for debug just different way of using the keys
 
-Player::Player(int _x, int _y, char const keys[], Screen *_grid)
+Player::Player(int _x, int _y, char const keys[], Screen *_grid,char _sprite)
 {
     x = _x;
     y = _y;
+    sprite=_sprite;
     grid = _grid;
     for (int i = 0; i < 6; i++)
         // copying the keys to an array stored in the player object
@@ -54,10 +55,10 @@ void Player::move()
 
 // just changes the way controls work(betterkeys just add the option to stop moving by trying to move the opposite direction)
 #ifndef betterkeys
-void Player::keyCheck(char key = 0)
+void Player::keyCheck(char key)
 { // keyc - key char
     int i;
-    for (i = 0; i < 6; i++)
+    for (i=0;i<6;i++)
     {
         if (controlKeys[i] == key)
         {
@@ -130,4 +131,8 @@ void Player::draw()
 {
     // because the player is only 1 char using DrawAt function
     DrawAt(grid->getstartx() + x, grid->getstarty() + y, sprite);
+}
+void Player::tick(){
+    move();
+    draw();
 }
