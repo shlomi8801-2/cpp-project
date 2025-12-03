@@ -46,6 +46,7 @@ void Player::move()
         // if the block standing on is just air there is not much to do with it so skip the checks by returning
         return;
     }
+    
 
     if (onblock->getPickable())
     {

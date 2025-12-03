@@ -44,6 +44,7 @@ void Object::set(const Object &_obj)
     this->filled = _obj.filled;
     this->Sprite = _obj.Sprite;
     this->visible = _obj.visible;
+    this->pickable = _obj.pickable;
 
     this->type = _obj.type;
     this->doorId = _obj.doorId;

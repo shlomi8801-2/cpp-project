@@ -25,8 +25,9 @@ class Object
     int riddleId;
     
 public:
+    
     Object() {};
-    inline Object(char _sprite, bool _filled = false, bool _pickable = false, bool _visible = false, int _type = 0, int _doorId = 0, int _keyId = 0, int _switchId = 0, int _riddleId = 0)
+    Object(char _sprite, bool _filled = false, bool _pickable = false, bool _visible = false, int _type = 0, int _doorId = 0, int _keyId = 0, int _switchId = 0, int _riddleId = 0)
     {
         Sprite = _sprite;
         filled = _filled;
@@ -46,7 +47,7 @@ public:
     void setvisible(bool state) { visible = state; }
     void setfilled(bool state) { filled = state; }
     void set(const Object &_obj);
-    bool getPickable() { return pickable; }
+    bool getPickable() const { return pickable; }
     void setPickable(bool state) { pickable = state; }
     inline bool isAir() { return (Sprite == ' ') && (filled = false); }
     inline void set(char _sprite, bool _filled, bool _visible)

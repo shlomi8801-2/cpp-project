@@ -5,6 +5,8 @@
 #include "Layouts.h"
 #include "MainMenu.h"
 
+#include "Blocks.h"
+
 #define FPS 10
 using namespace std;
 

@@ -16,9 +16,9 @@ namespace levels
 		"W                           WWWWWWWWWWWWWWWWWWWWW                             W", // 5
 		"W                                              @W                             W", // 6
 		"W                           WWWWWWWWWWWWWWWWWWWWW                             W", // 7
-		"W                           WWWWWWWWWWWWWWWWWWWWW                             W", // 8
-		"W                                 WWWW   W                                    W", // 9
-		"W                                                                             W", // 10
+		"W                       #   WWWWWWWWWWWWWWWWWWWWW                             W", // 8
+		"W                       *         WWWW   W                                    W", // 9
+		"W                       /                                                     W", // 10
 		"W                                                                             W", // 11
 		"W                                                                             W", // 12
 		"W                                                                             W", // 13
@@ -70,7 +70,6 @@ namespace levels
 		}
 		Object *obj = screen->getatxy(40, 8);
 		obj->set(Blocks::Bomb);
-		obj->setPickable(true); // for some reason it doesnt work without adding it(it stays false)
 
 		screen->draw();
 	}
@@ -110,8 +109,8 @@ namespace levels
 					(screen->getatxy(x,y))->set(arr[y][x],true,true);
 					break;
 			}
+		
 		}
-
 	}
 
 }
