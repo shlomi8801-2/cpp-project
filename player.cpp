@@ -1,7 +1,7 @@
 #include "player.h"
 #include "utils.h"
 #include "screen.h"
-#include "blocks.h"
+#include "Blocks.h"
 #include <iostream>
 
 
@@ -16,16 +16,16 @@ player::player(int _x,int _y,char const keys[],Screen* _grid){
     //copying the keys to an array stored in the player object
         controlKeys[i] = keys[i];
 }
-void player::pickupItem(object* onblock){
+void player::pickupItem(Object* onblock){
     //if its pickable make a copy of it in the heap and store it in the player's inventory
-        this->inv = new object(*onblock);
-        grid->setatxy(x,y,&blocks::Air);
+        this->inv = new Object(*onblock);
+        grid->setatxy(x,y,&Blocks::Air);
         grid->updateLegend();
     };
 
 void player::move(){
     //erase the previous player char by getting the block the player is on and checking if its visible if true draw it if not draw blank(space)
-    object* onblock = grid->getatxy(x,y);
+    Object* onblock = grid->getatxy(x,y);
     DrawAt(grid->getstartx()+x,grid->getstarty()+y,onblock->getvisible() ? onblock->getSprite(): ' ');
     
 

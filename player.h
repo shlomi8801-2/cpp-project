@@ -1,12 +1,12 @@
 #pragma once
 class Screen;
-class object;
+class Object;
 #include "screen.h"
 
 
 class player{
     char controlKeys[6];
-    object* inv; // when collecting an item make a copy of it in the heap and save it here after disposing copy it to the screen array and free it
+    Object* inv; // when collecting an item make a copy of it in the heap and save it here after disposing copy it to the screen array and free it
     int vx =0;//velocity at x axis
     int vy=0; //velocity at y axis
     int x;
@@ -26,6 +26,6 @@ class player{
     void move();
     void keyCheck(char key);
     void draw();
-    inline object* getInv() {return inv;}
-    void pickupItem(object* onblock);
+    inline Object* getInv() {return inv;}
+    void pickupItem(Object* onblock);
 };

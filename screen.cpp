@@ -3,7 +3,7 @@
 #include <iostream>
 #include "screen.h"
 #include "console.h"
-#include "blocks.h"
+#include "Blocks.h"
 
 using namespace std;
 //use array to store the screen background and have another array for players to draw    
@@ -12,13 +12,13 @@ using namespace std;
         int maxidx = gameHeight*gameWidth;
         //like that every 80 characters is a row in the screen so if you for example want to get 1,1 pos you need 80*1+1 in the array
         // but now we need to add legend and stats so we will take like 3 rows - see in screen.h
-        objarr = new object[maxidx];// gameHeight arrays of gameWidth items(2d array will represent the same way in the memory as array)
+        objarr = new Object[maxidx];// gameHeight arrays of gameWidth items(2d array will represent the same way in the memory as array)
         
-        //fill the screen with blank objects - no need because it has default values as object types
+        //fill the screen with blank objects - no need because it has default values as Object types
         drawDefaultWalls();
 
     }
-    object* Screen::getatxy(const int x,const int y){
+    Object* Screen::getatxy(const int x,const int y){
         //returns nullptr if out of screen
         int idx = y*gameWidth+x;
         return idx>=0 && idx <=gameHeight*gameWidth ?&(objarr[idx]) : nullptr;
@@ -36,7 +36,7 @@ using namespace std;
         cout.flush();
     }
 
-void object::set(const object& _obj){
+void Object::set(const Object& _obj){
     //does not copy x and y values
     this->filled = _obj.filled;
     this->Sprite = _obj.Sprite;
@@ -52,16 +52,16 @@ void object::set(const object& _obj){
     void Screen::drawDefaultWalls(){
         //simple walls
         for (int i=0;i<gameWidth;i++){
-            objarr[i].set(blocks::Wall);
-            objarr[(gameHeight-1)*gameWidth+i].set(blocks::Wall);
+            objarr[i].set(Blocks::Wall);
+            objarr[(gameHeight-1)*gameWidth+i].set(Blocks::Wall);
         }
         for (int i=1;i<gameHeight-1;i++){
-            objarr[gameWidth*i].set(blocks::Wall);
-            objarr[gameWidth*i+gameWidth-1].set(blocks::Wall);
+            objarr[gameWidth*i].set(Blocks::Wall);
+            objarr[gameWidth*i+gameWidth-1].set(Blocks::Wall);
         }
     }
 
-    void Screen::setatxy(const int x, const int y,const object* obj){
+    void Screen::setatxy(const int x, const int y,const Object* obj){
         //if out of screen doing nothing
         int idx = y*gameWidth+x;
         if (idx>=0 && idx <=gameHeight*gameWidth) //checking if its in the screen

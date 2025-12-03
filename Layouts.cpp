@@ -1,5 +1,5 @@
 #include "Layouts.h"
-#include "blocks.h"
+#include "Blocks.h"
 
 // Maybe will be changed to a class later if neccessary. Didn't think it through yet.
 namespace levels {
@@ -18,17 +18,21 @@ namespace levels {
 		screen->drawDefaultWalls();
 
 		for (int y = 5; y <= 7; y++) {
-			object* obj = screen->getatxy(40, y);
+			Object* obj = screen->getatxy(40, y);
 			if (obj != nullptr) {
 				// obj->set('|',true,true);
-				obj->set(blocks::Wall);
+				obj->set(Blocks::Wall);
 			}
 		}
-		object* obj = screen->getatxy(40, 8);
-		obj->set(blocks::Bomb);
+		Object* obj = screen->getatxy(40, 8);
+		obj->set(Blocks::Bomb);
 		obj->setPickable(true); // for some reason it doesnt work without adding it(it stays false)
 		
 
 		screen->draw();
 	}
+	void generateLayoutFromArr(char* arr[],Object** outArr){
+		//takes an array like the main menu and generates array of objects from the objects being saved chars for example: @ = bomb
+	}
+
 }
