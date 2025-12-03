@@ -42,6 +42,7 @@ public:
     void setfilled(bool state) { filled = state; }
     void set(const object& _obj);
     bool getPickable() { return pickable; }
+    int getType() {return type;}
     void setPickable(bool state) { pickable = state; }
     inline bool isAir() { return (Sprite == ' ') && (filled = false); }
     inline void set(char _sprite, bool _filled, bool _visible) { Sprite = _sprite; filled = _filled; visible = _visible; }

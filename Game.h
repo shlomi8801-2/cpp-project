@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "Screen.h"
-#include "Item.h"
+// #include "Item.h"
 #include "Constants.h"
 #include "Room.h"
 
@@ -16,20 +16,21 @@ class Game {
 	Room* rooms[3];
 	int currRoomId; 
 
-	Player* player1;
-	Player* player2;
+	
 
 public:
-
+	Player* player1;
+	Player* player2;
 	Game::Game();
 	Game::~Game();
 
-	void setState(gameState newState) { currentState = newState };
-	gameState getState() const { return currentState };
+	void setState(gameState newState) { currentState = newState; }
+	gameState getState() const { return currentState; }
+	inline int getCurrentState() {return (int)currentState;}
+	inline Screen* getCurrentScreen() {return currentScreen;}
 
 	static void Game::launchGame();
-	static void Player::handleInput();
-
+	static void Game::launchGame();
 	void Game::initialize();
-	void Game::changeRoom(int newRoomId, int spawnX, int spawnY)
+	void Game::changeRoom(int newRoomId, int spawnX, int spawnY);
 };

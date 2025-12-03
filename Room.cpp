@@ -1,6 +1,6 @@
 #include "Room.h"
 
-Room::Room(int num) : roomNum(int num), screen(nullptr) {
+Room::Room(int num) : roomNum(num), screen(nullptr) {
     modCapacity = 10;
     mods = new Mods[modCapacity];
     modCount = 0;

@@ -9,8 +9,12 @@
 class Screen {
     int startx, starty;
     int gameWidth, gameHeight;
+    object screen[ScreenSize::MAX_X][ScreenSize::MAX_Y];
 
 public:
+    Screen(){
+        // screen = new object[ScreenSize::MAX_X][ScreenSize::MAX_Y];
+    }
     void clear();
     void drawAt(int x, int y, char sprite);
     void drawObject(int x, int y, const object& obj);

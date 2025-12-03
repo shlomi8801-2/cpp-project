@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "MainMenu.h"
+#include "Room.h"
 
 enum class gameState;
 
@@ -18,8 +19,8 @@ Game::~Game() {
 	if (currentScreen != nullptr) {
 		delete currentScreen;
 	}
-	for (Game& room : rooms) {
-		if room != nullptr {
+	for (Room* room : rooms) {
+		if (room != nullptr) {
 			delete room;
 		}
 	}
@@ -31,7 +32,7 @@ Game::~Game() {
 	}
 };
 
-static void Game::launchGame() {
+void Game::launchGame() { // no need for static its spacified in Game.h
 
 	Game newGame;
 	gameState& currState = newGame.currentState;
@@ -44,14 +45,14 @@ static void Game::launchGame() {
 			// Show main menu
 			MainMenu::showMainMenu(currScreen);
 			// Handle menu choice
-			handleMainMenuChoice(currState);
+			MainMenu::handleMainMenuChoice(currState);
 			break;
 		
 		case gameState::instructions:
 			// Show instructions screen
 			MainMenu::showInstructions(currScreen);
 			// Handle return to main menu
-			handleInstructionsChoice(currState);
+			MainMenu::handleInstructionsChioce(currState);
 			break;
 		
 		case gameState::inGame:
@@ -91,11 +92,11 @@ void Game::initialize() {
 	rooms[2] = new Room(2);
 
 	for (int i = 0; i < 3; i++) {
-		rooms[i]->setScreen(screen);
+		rooms[i]->setScreen(currentScreen);
 		rooms[i]->initializeDefault();
 	}
 
-	currentRoomIndex = 0;
+	currRoomId = 0;
 	rooms[0]->activate();
 
 	player1 = new Player(Point(5, 5, 0, 0, 'A'), nullptr, 1);
@@ -114,13 +115,13 @@ static void handleInput() {
 	if (check_kbhit()) {
 		char pressed = get_single_char();
 
-		if (pressed == Action::ESC) {
+		if (pressed == (int)(Action::ESC)) {
 			// Open Pause Menu
 
 			return;
 		}
 		else {
-			for (static constexpr PlayerKeyBinding& binding : ::actions) {
+			for (constexpr PlayerKeyBinding binding : actions) {
 				if (binding.key == pressed) {
 					Player::performAction(binding.playerID, binding.action);
 					return;
@@ -132,7 +133,7 @@ static void handleInput() {
 
 void gameLoop(Game& game) {
 	// Main game loop
-	while (game.currentState == gameState::inGame) {
+	while (game.getCurrentState() == (int)gameState::inGame) {
 		
 		// Handle player input
 		Player::handleInput();
@@ -140,7 +141,7 @@ void gameLoop(Game& game) {
 		game.player1->move();
 		game.player2->move();
 
-		game.currentScreen->draw();
+		game.getCurrentScreen()->draw();
 
 		sleep_ms(50); // Control game speed
 	}

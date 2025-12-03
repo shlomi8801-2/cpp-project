@@ -1,5 +1,5 @@
 #pragma once
-#include "screen.h"
+#include "Screen.h"
 
 namespace levels {
 	void changeLayout(int levelNum, Screen* screen);

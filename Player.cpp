@@ -30,17 +30,17 @@ void Player::performAction(int playerID, Action action) {
 	}
 }
 
-void move() {
+void Player::move() {
     Point currLoc = pos;
     pos.move();
-    if (screen.isWall(pos)) {
+    if (Screen.isWall(currLoc)) {
         pos = currLoc; // Revert to original position if out of bounds
     }
     pos.draw();
 }
 
-void addToInventory(const object& item) {
-	if (item.type != 0 && item.pickable) { // assuming type 0 is air/general/wall
+void addToInventory(object& item) {
+	if (item.getType() != 0 && item.getPickable()) { // assuming type 0 is air/general/wall
     
 
 		////// Need to create inventory to continue //////

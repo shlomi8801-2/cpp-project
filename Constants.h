@@ -28,4 +28,4 @@ enum class Action {
 	ESC = 27
 };
 
-enum class ScreenSize { MAX_X = 80, MAX_Y = 25 };
+enum ScreenSize { MAX_X = 80, MAX_Y = 25 };

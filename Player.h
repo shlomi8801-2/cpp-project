@@ -54,8 +54,9 @@ public:
 
     void setPosition(int x, int y) { pos.x = x; pos.y = y; };
     void setPosition(Point newPos) { pos = newPos; };
-    
-    void Player::performAction(int playerID, Action action)
+    static void Player::handleInput();
+
+    static void Player::performAction(int playerID, Action action);
     void move();
     void moveTo(int x, int y) { setPosition(x, y); } // In case we need it
     void draw() { pos.draw(); }

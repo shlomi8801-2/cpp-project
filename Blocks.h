@@ -1,5 +1,6 @@
 #pragma once
 #include "Screen.h"
+#include "Object.h"
 
 namespace Blocks {
     //added to copy default blocks with copy constructor

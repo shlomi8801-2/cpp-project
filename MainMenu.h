@@ -4,7 +4,7 @@
 #include "Screen.h"
 #include "Game.h"
 
-namespace mainmenu {
+namespace MainMenu {
 	void showMainMenu(Screen* screen) {
 		screen->draw_static(MAIN_MENU, 25);
 	}
