@@ -10,10 +10,8 @@ using namespace std;
 
 Screen::Screen()
 {
-    int maxidx = gameHeight * gameWidth;
-    // like that every 80 characters is a row in the screen so if you for example want to get 1,1 pos you need 80*1+1 in the array
-    //  but now we need to add legend and stats so we will take like 3 rows - see in screen.h
-    objarr = new Object[maxidx]; // gameHeight arrays of gameWidth items(2d array will represent the same way in the memory as array)
+    // objarr = new Object[ScreenSize::MAX_X][ScreenSize::MAX_Y]; // already sets it in the screen.h file
+    //which saves it in the stack later will move to heap
 
     // fill the screen with blank objects - no need because it has default values as Object types
     drawDefaultWalls();
@@ -22,7 +20,7 @@ Object *Screen::getatxy(const int x, const int y)
 {
     // returns nullptr if out of screen
     int idx = y * gameWidth + x;
-    return idx >= 0 && idx <= gameHeight * gameWidth ? &(objarr[idx]) : nullptr;
+    return (idx >= 0 && (idx <= gameHeight * gameWidth)) ? &(objarr[x][y]) : nullptr;
 }
 
 void Screen::draw_static(const char *layout[], size_t lines)
@@ -59,13 +57,13 @@ void Screen::drawDefaultWalls()
     // simple walls
     for (int i = 0; i < gameWidth; i++)
     {
-        objarr[i].set(Blocks::Wall);
-        objarr[(gameHeight - 1) * gameWidth + i].set(Blocks::Wall);
+        objarr[i][0].set(Blocks::Wall);
+        objarr[i][gameHeight - 1].set(Blocks::Wall);
     }
     for (int i = 1; i < gameHeight - 1; i++)
     {
-        objarr[gameWidth * i].set(Blocks::Wall);
-        objarr[gameWidth * i + gameWidth - 1].set(Blocks::Wall);
+        objarr[0][i].set(Blocks::Wall);
+        objarr[gameWidth - 1][i].set(Blocks::Wall);
     }
 }
 
@@ -74,7 +72,7 @@ void Screen::setatxy(const int x, const int y, const Object *obj)
     // if out of screen doing nothing
     int idx = y * gameWidth + x;
     if (idx >= 0 && idx <= gameHeight * gameWidth) // checking if its in the screen
-        objarr[idx] = *obj;
+        objarr[x][y] = *obj;
 }
 void Screen::draw()
 {
@@ -87,10 +85,10 @@ void Screen::draw()
         {
             // cout<< x<<","<<y<<"\n";
             idx = y * gameWidth + x;
-            if (objarr[idx].getvisible())
+            if (objarr[x][y].getvisible())
             {
                 gotoxy(startx + x, starty + y);
-                cout << objarr[y * gameWidth + x].getSprite();
+                cout << objarr[x][y].getSprite();
             }
         }
     }
@@ -106,9 +104,10 @@ bool Screen::canMoveTo(const int x, const int y)
 void Screen::clearScreen()
 {
     // Resets ALL objects in memory
-    for (int i = 0; i < gameHeight * gameWidth; i++)
-    {
-        objarr[i].set(' ', false, false);
+    for (int y=0;y<gameHeight;y++)
+    for (int i = 0; i < gameWidth; i++){
+         cout<<i<<","<<y<<flush;
+        objarr[i][0].set(' ', false, false);
     }
 }
 void Screen::updateLegend()
@@ -119,5 +118,6 @@ void Screen::updateLegend()
     // etc
     // its displayed in the bottom of the screen with width * legendHeight size
     gotoxy(startx, starty + gameHeight);
-    cout << "inventory:" << parr[0]->getInv()->getSprite();
+    Object* pinv = parr[0]->getInv(); // by default its set to 0 because its on the stack so check it to avoid using function on nullptr(0)
+    cout << "inventory:" << (!pinv ? ' ' : pinv->getSprite()); // basically "if not pinv" to check if its nullptr == didn't work
 }

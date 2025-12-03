@@ -1,7 +1,7 @@
 #pragma once
 #include "player.h"
 #include <cstddef> // for size_t and other standard c things
-
+#include "Constants.h"
 class player;
 
 class Object
@@ -23,7 +23,7 @@ class Object
     int keyId;
     int switchId;
     int riddleId;
-
+    
 public:
     Object() {};
     inline Object(char _sprite, bool _filled = false, bool _pickable = false, bool _visible = false, int _type = 0, int _doorId = 0, int _keyId = 0, int _switchId = 0, int _riddleId = 0)
@@ -60,14 +60,13 @@ public:
 
 class Screen
 {
+    gameState currState = gameState::mainMenu;
     int startx = 0;
     int starty = 1;
-    const int width = 80;
-    const int height = 25;
     const int legendHeight = 3;
-    int gameWidth = 80;
-    int gameHeight = height - legendHeight;
-    Object *objarr;
+    const int gameWidth = ScreenSize::MAX_X;
+    const int gameHeight = ScreenSize::MAX_Y - legendHeight;
+    Object objarr[ScreenSize::MAX_X][ScreenSize::MAX_Y];
     player *parr[2];
 
 public:

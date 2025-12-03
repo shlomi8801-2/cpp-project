@@ -34,7 +34,6 @@ int main()
     mainscreen.setPlayer(0, &p1);
     int currentLevel = 1;
     levels::changeLayout(currentLevel, &mainscreen);
-
     while (1)
     {
         showfps();

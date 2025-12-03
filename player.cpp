@@ -37,7 +37,7 @@ void player::move()
     // currently the blocking will only work for 1 cord at a time
     x += grid->canMoveTo(x + vx, y) ? vx : 0;
     y -= grid->canMoveTo(x, y - vy) ? vy : 0; // y starts at 0 and goes to negative numbers in the screen
-
+    
     // gets the block it stands on now
     onblock = grid->getatxy(x, y);
     if (onblock->isAir())
