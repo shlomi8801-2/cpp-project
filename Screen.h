@@ -1,27 +1,40 @@
 #pragma once
-#include "Console.h"
-#include <cstddef>
 #include <iostream>
-#include "Blocks.h"
-#include "Player.h"
-#include <cstddef> // for size_t and other standard c things
+#include 'Layouts.h'
 
-class Screen {
-    int startx, starty;
-    int gameWidth, gameHeight;
-    object screen[ScreenSize::MAX_X][ScreenSize::MAX_Y];
+class Point;
+
+using std::cout, std::endl;
+
+class Screen
+{
+public:
+	enum { MAX_X = 80, MAX_Y = 25 };
+private:
+	const char* screen[MAX_Y];
+
+	char getCharAt(const Point& p) const;
 
 public:
-    Screen(){
-        // screen = new object[ScreenSize::MAX_X][ScreenSize::MAX_Y];
-    }
-    void clear();
-    void drawAt(int x, int y, char sprite);
-    void drawObject(int x, int y, const object& obj);
-    void drawLegend(const std::string& inventoryInfo);
-    void refresh();  // Flush output
 
-    // Coordinate conversion helpers
-    int getScreenX(int gameX) const { return startx + gameX; }
-    int getScreenY(int gameY) const { starty + gameY; }
+	// Constructor that takes a screen layout
+	Screen(const char* layout[MAX_Y]) {
+		for (int i = 0; i < MAX_Y; i++) {
+			screen[i] = layout[i];
+		}
+	}
+
+	void draw() const;
+
+	bool isWall(const Point& p) const {
+		return getCharAt(p) == '#';
+	}
+
 };
+
+// Screen layouts namespace
+namespace Screens {
+
+	// Main Menu Screen
+	extern const char* MAIN_MENU[Screen::MAX_Y];
+}

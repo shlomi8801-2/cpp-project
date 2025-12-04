@@ -1,16 +1,17 @@
 #pragma once
 #include "Screen.h"
-#include "Blocks.h"
 
 using namespace layouts
 
 class Room {
 	int roomId;
-	char** layout;
+	Screen currScreen;
 	char mods[ROWS][COLS];
 
 public:
 	Room(int id);
-	void addMod(int x, int y, char modChar);
+	static void addMod(int x, int y, char modChar);
+	static void drawMods();
+	static void saveMods();
 };
 	

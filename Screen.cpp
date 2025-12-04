@@ -1,27 +1,17 @@
 #include "Screen.h"
-
-
-using namespace std;
-
- 
-
-void drawDefaultWalls() {
-
-    for (int i = 0; i < ScreenSize::MAX_X; i++) {
-        DrawAt(i, 0, '#');
-        DrawAt(i, 20, '#');
-	}
-    for (int i = 1; i < ScreenSize::MAX_Y - 6; i++) {
-        DrawAt(0, i, '#');
-        DrawAt(79, i, '#');
-	}
-}
+#include "Point.h"
 
 char Screen::getCharAt(const Point& p) const {
-    return screen[p.getY()][p.getX()];
+	return screen[p.getY()][p.getX()];
 }
 
-bool isWall(const Point& p) const {
-    return getCharAt(p) == '#';
+void Screen::draw() const {
+	cls();
+	gotoxy(0, 0);
+	for (size_t i = 0; i < MAX_Y - 1; ++i) {
+		cout << screen[i] << endl;
+	}
+	cout << screen[MAX_Y - 1];
+	cout.flush();
 }
 
