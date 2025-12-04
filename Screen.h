@@ -17,17 +17,18 @@ class Screen
     const int gameHeight = ScreenSize::MAX_Y - legendHeight;
     Object objarr[ScreenSize::MAX_X][ScreenSize::MAX_Y-3];
     Player *parr[2];
+    int* currLevel;
 
 public:
     
     inline int getstartx() { return startx; }
     inline int getstarty() { return starty; }
-    Screen();
+    Screen(int* clevel){currLevel = clevel;}
     void drawDefaultWalls();
     Object *getatxy(const int x, const int y);
     void setatxy(const int x, const int y, const Object *obj);
     void draw();
-    bool canMoveTo(const int x, const int y);
+    bool canMoveTo(const int x, const int y, Player* p=0);
     void draw_static(const char *layout[], size_t lines);
     void clearScreen();
     void updateLegend(); // also draws it

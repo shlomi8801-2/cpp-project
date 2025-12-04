@@ -8,10 +8,10 @@ Exercise 1:
 * add(see in the pdf in info folder)
 
   > must:
-  > * two players
+  > * ~~two players~~
   > * ~~walls~~
   > * keys
-  > * doors
+  > * ~~doors~~
   >
   > select 3 to add:
   > * bomb

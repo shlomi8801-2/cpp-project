@@ -2,7 +2,7 @@
 #include "utils.h"
 #include "Screen.h"
 #include "Player.h"
-#include "Layouts.h"
+
 #include "MainMenu.h"
 
 #include "Blocks.h"
@@ -15,8 +15,8 @@ int main()
     cout << "program started!" << endl;
     init_console();
     hideCursor();
-
-    Screen mainscreen;
+    int currentLevel = 2;
+    Screen mainscreen(&currentLevel);
 
     // Show main menu first
     mainmenu::showMainMenu(&mainscreen);
@@ -37,8 +37,9 @@ int main()
     Player p2(2, 10, "lmjiko", &mainscreen,'b');
     mainscreen.setPlayer(1, &p2);
 
-    int currentLevel = 2;
-    levels::changeLayout(currentLevel, &mainscreen);
+    
+    //moved the change layout to draw function
+    mainscreen.draw();
     while (1)
     {
         showfps();

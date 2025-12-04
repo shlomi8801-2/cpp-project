@@ -9,4 +9,5 @@ namespace Blocks
     const Object Switch = Object('/', false, false, true, 4); // '\' when "on" state
     const Object Obstacle = Object('*', true, false, true, 5);
     const Object Air = Object(' ', false, false, false);
+    const Object Door = Object(' ', true,false,true,1);
 }

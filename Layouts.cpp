@@ -6,7 +6,7 @@
 namespace levels
 {
 	const char* level2map[80] = {
-		// 0123456789012345678901234567890123456789012345678901234567890123456789012345678
+	 // 01234567890123456789012345678901234567890123456789012345678901234567890123456789
 		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", // 0
 		"W                                                                             W", // 1
 		"W                                                                             W", // 2
@@ -16,7 +16,7 @@ namespace levels
 		"W                                              @W                             W", // 6
 		"W                           WWWWWWWWWWWWWWWWWWWWW                             W", // 7
 		"W                       #   WWWWWWWWWWWWWWWWWWWWW                             W", // 8
-		"W                       *         WWWW   W                                    W", // 9
+		"W                       *         WWWW   W                                    1", // 9
 		"W                       /                                                     W", // 10
 		"W                                                                             W", // 11
 		"W                                                                             W", // 12
@@ -30,8 +30,7 @@ namespace levels
 		"W                                                                             W", // 20
 		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" // 21
 	};
-
-	// Not working properly yet
+	//in the levels functions dont use screen->draw it causes infinite recursion
 	void changeLayout(int levelNum, Screen *screen)
 	{
 		switch (levelNum)
@@ -51,7 +50,6 @@ namespace levels
 	void level2(Screen *screen){
 		screen->clearScreen();
 		generateLayoutFromArr(level2map,screen);
-		screen->draw();
 	}
 	void level1(Screen *screen)
 	{
@@ -69,8 +67,6 @@ namespace levels
 		}
 		Object *obj = screen->getatxy(40, 8);
 		obj->set(Blocks::Bomb);
-
-		screen->draw();
 	}
 	void generateLayoutFromArr(const char* arr[MAX_Y-LEGEND_HEIGHT], Screen* screen)
 	{
@@ -88,22 +84,37 @@ namespace levels
 		for (int y=0;y<MAX_Y-LEGEND_HEIGHT;y++)
 		for (int x=0;x<MAX_X;x++){
 			// std::cout<<(screen->getatxy(x,1))->getSprite()<<x<<std::flush;
+			Object* targetedblock = (screen->getatxy(x,y));
 			switch (arr[y][x]){ // idk why its backwards maybe because
 				case '@':
-					(screen->getatxy(x,y))->set(Blocks::Bomb);
+					targetedblock->set(Blocks::Bomb);
 					break;
 				case 'W':
-					(screen->getatxy(x,y))->set(Blocks::Wall);
+					targetedblock->set(Blocks::Wall);
 					break;
 				case '*':
-					(screen->getatxy(x,y))->set(Blocks::Obstacle);
+					targetedblock->set(Blocks::Obstacle);
 					break;
 				case '/':
-					(screen->getatxy(x,y))->set(Blocks::Switch);
+					targetedblock->set(Blocks::Switch);
 					break;
 				case ' ':
-					(screen->getatxy(x,y))->set(Blocks::Air);
+					targetedblock->set(Blocks::Air);
 					break;
+				case '1'://runs the same code for multiple cases
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+					targetedblock->set(Blocks::Door);
+					targetedblock->setDoorId(arr[y][x]);
+					targetedblock->setSprite(arr[y][x]);
+					break;
+
 				default:
 					(screen->getatxy(x,y))->set(arr[y][x],true,true);
 					break;

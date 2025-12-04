@@ -11,6 +11,8 @@ class Player
     int vy = 0;  // velocity at y axis
     int x;
     int y;
+    int level; // the level of the player currently
+    bool canmove=true;
     Screen *grid = nullptr;
     char sprite = 'a';
     enum movement
@@ -25,13 +27,17 @@ class Player
 
 public:
 
-    Player(int _x, int _y, char const keys[], Screen *_grid,char _sprite='a');
+    Player(int _x, int _y, char const keys[], Screen *_grid,char _sprite='a',int _level=1);
     void move();
     void keyCheck(char key);
     void draw();
     inline Object *getInv() { return inv; }
     void pickupItem(Object *onblock);
     void tick();
+    void moveToLevel(int _level);
+    int getLevel() {return level;} 
+    void unlockMove() {canmove = true;}
+    void emptyInv();
 };
 
 

@@ -4,18 +4,19 @@
 #include "Screen.h"
 #include "console.h"
 #include "Blocks.h"
+#include "Layouts.h"
 
 using namespace std;
 // use array to store the screen background and have another array for players to draw
 
-Screen::Screen()
-{
-    // objarr = new Object[ScreenSize::MAX_X][ScreenSize::MAX_Y]; // already sets it in the screen.h file
-    //which saves it in the stack later will move to heap
-
-    // fill the screen with blank objects - no need because it has default values as Object types
-    drawDefaultWalls();
-}
+//Screen::Screen()
+//{
+//    // objarr = new Object[ScreenSize::MAX_X][ScreenSize::MAX_Y]; // already sets it in the screen.h file
+//    //which saves it in the stack later will move to heap
+//
+//    // fill the screen with blank objects - no need because it has default values as Object types
+//    
+//}
 Object *Screen::getatxy(const int x, const int y)
 {
     // returns nullptr if out of screen
@@ -65,6 +66,7 @@ void Screen::setatxy(const int x, const int y, const Object *obj)
 void Screen::draw()
 {
     // draw the whole screen - dont use alot its not optimized only at the start or big object removal
+    levels::changeLayout(*currLevel, this);
     clrscr();
     int idx;
     for (int y = 0; y < gameHeight; y++)
@@ -84,9 +86,35 @@ void Screen::draw()
     updateLegend();
     cout << flush; // clear the buffer of the screen in case cout missed some characters it forces it to print them somehow i think
 }
-bool Screen::canMoveTo(const int x, const int y)
+bool Screen::canMoveTo(const int x, const int y, Player* p)
 {
-    return !((x >= 0 && y >= 0 && x <= gameWidth && y <= -gameHeight) || getatxy(x, y)->getfilled()); // y is -height because the screen starts at 0 0 and shows at x -y
+     //doesn't matter if its 2 if statements or switch case because the special objects that are not pickable are just 
+    //door and obstacle
+    bool output = !((x >= 0 && y >= 0 && x <= gameWidth && y <= -gameHeight));// y is -height because the screen starts at 0 0 and shows at x -y
+    Object* target = getatxy(x,y);
+    if (output && target->getfilled()){
+        //check here if door obstacle or just normal block
+        switch (target->getType()){
+            case 1://door
+                if(target->canOpenDoor(p)){
+                    //if can open the door just open it for the rest of the game
+                    target->set(Blocks::Air);
+                    return true;
+                }
+                break;
+            case 5:
+                //need work here
+                break;
+            default:
+                return false;
+            
+        }
+    }else if (output) {
+        return true;
+    }else {
+         return false;
+    }
+   return false;
 }
 
 void Screen::clearScreen()

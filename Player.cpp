@@ -6,10 +6,11 @@
 
 // dont use it its for debug just different way of using the keys
 
-Player::Player(int _x, int _y, char const keys[], Screen *_grid,char _sprite)
+Player::Player(int _x, int _y, char const keys[], Screen *_grid,char _sprite,int _level)
 {
     x = _x;
     y = _y;
+    level = _level;
     sprite=_sprite;
     grid = _grid;
     for (int i = 0; i < 6; i++)
@@ -27,6 +28,7 @@ void Player::pickupItem(Object *onblock)
 void Player::move()
 {
     // erase the previous player char by getting the block the player is on and checking if its visible if true draw it if not draw blank(space)
+    if (!canmove) return;
     Object *onblock = grid->getatxy(x, y);
     DrawAt(grid->getstartx() + x, grid->getstarty() + y, onblock->getvisible() ? onblock->getSprite() : ' ');
 
@@ -35,17 +37,22 @@ void Player::move()
     //  - special for obstacle: calculate the force needed to move it
     //  - if the item in front is pickable and inventory is empty pick it up
 
+   
+    
+
     // currently the blocking will only work for 1 cord at a time
     x += grid->canMoveTo(x + vx, y) ? vx : 0;
     y -= grid->canMoveTo(x, y - vy) ? vy : 0; // y starts at 0 and goes to negative numbers in the screen
     
     // gets the block it stands on now
     onblock = grid->getatxy(x, y);
+
     if (onblock->isAir())
     {
         // if the block standing on is just air there is not much to do with it so skip the checks by returning
         return;
     }
+    
     
 
     if (onblock->getPickable())
@@ -136,4 +143,26 @@ void Player::draw()
 void Player::tick(){
     move();
     draw();
+}
+void Player::moveToLevel(int _level){
+    //when moving to other level the move function can apply with strange behavior because the level is not loaded so setting it to not move
+    level = _level;
+    canmove = false;
+    //now set the x and y to the opposite side like its really level by level
+    vx = vy = 0;
+    if (x == MAX_X){
+        x=0;
+    }else if (x == 0)
+    {
+        x=MAX_X;
+    }else if (y= MAX_Y-LEGEND_HEIGHT){
+        y=0;
+    }else if (y==0){
+        y=MAX_Y-LEGEND_HEIGHT;
+    }
+    
+}
+void Player::emptyInv(){
+    //delete inv;
+    inv = 0;
 }
