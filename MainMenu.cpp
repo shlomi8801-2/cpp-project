@@ -75,11 +75,11 @@ namespace mainmenu
 			break;
 		case 8:
 			screen->draw_static(INSTRUCTIONS,25);
-			scanf("%c");
 			break;
 		case 9:
 			exit(0);
 		default:
+		    screen->draw_static(MAIN_MENU, 25);
 			break;
 		}
 		}
@@ -100,6 +100,7 @@ namespace mainmenu
 					return 8; // Instructions
 				if (c == '9')
 					return 9; // Quit
+				else return 0;
 			}
 			sleep_ms(50);
 		}
