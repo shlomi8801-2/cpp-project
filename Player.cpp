@@ -30,10 +30,9 @@ void Player::move()
     // erase the previous player char by getting the block the player is on and checking if its visible if true draw it if not draw blank(space)
     
     if (!canmove){
-        cout<< "somthing went wrong!";
         return;
     }
-    try {
+    
 
     
     Object *onblock;
@@ -49,8 +48,10 @@ void Player::move()
     
     
     // currently the blocking will only work for 1 cord at a time
-    x += grid->canMoveTo(x + vx, y) ? vx : 0;
-    y -= grid->canMoveTo(x, y - vy) ? vy : 0; // y starts at 0 and goes to negative numbers in the screen
+    if (canmove && grid->canMoveTo(x + vx, y -vy)){
+        x +=vx;
+        y -= vy;
+    }
     grid->updateLegend(); // for debugging
     // gets the block it stands on now
     onblock = grid->getatxy(x, y);
@@ -67,9 +68,6 @@ void Player::move()
     {
         pickupItem(onblock); // no need to send but it takes one less call to getatxy might add it in the pickupItem func later
     }
-}catch(int error){
-    cout<<"something went wrong "<<error;
-}
 }
 
 // just changes the way controls work(betterkeys just add the option to stop moving by trying to move the opposite direction)
@@ -162,18 +160,19 @@ void Player::moveToLevel(int _level){
     level = _level;
     canmove = false;
     //now set the x and y to the opposite side like its really level by level
-    vx = vy = 0;
-    DrawAt(grid->getstartx() + x, grid->getstarty() + y,grid->getatxy(x,y)->getSprite()); // clear the last player position
-    if (x == MAX_X){
-        x=0;
-    }else if (x == 0)
-    {
-        x=MAX_X;
-    }else if (y== MAX_Y-LEGEND_HEIGHT){
-        y=0;
-    }else if (y==0){
-        y=MAX_Y-LEGEND_HEIGHT;
-    }
+    vx = 0; 
+    vy = 0;
+    // DrawAt(grid->getstartx() + x, grid->getstarty() + y,grid->getatxy(x,y)->getSprite()); // clear the last player position
+    // if (x == MAX_X){
+    //     x=0;
+    // }else if (x == 0)
+    // {
+    //     x=MAX_X;
+    // }else if (y== MAX_Y-LEGEND_HEIGHT){
+    //     y=0;
+    // }else if (y==0){
+    //     y=MAX_Y-LEGEND_HEIGHT;
+    // }
     
 }
 void Player::emptyInv(){
