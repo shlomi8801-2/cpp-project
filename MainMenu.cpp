@@ -14,7 +14,7 @@ namespace mainmenu
 		"|                            WELCOME TO THE GAME                              |", // 4
 		"|                           ---------------------                             |", // 5
 		"|                                                                             |", // 6
-		"|                            (1) Start New Game                               |", // 7
+		"|                             (1) Resume Game                                 |", // 7
 		"|                           (8) View Instructions                             |", // 8
 		"|                                 (9) Exit                                    |", // 9
 		"|                                                                             |", // 10
@@ -58,13 +58,32 @@ namespace mainmenu
 		 "|            * Exiting back to main menu clears progress.                     |", // 20
 		 "|     INVENTORY : Shown at top of screen.Lists items held by each player.     |", // 21
 		 "|=============================================================================|", // 22
-		 "|                          Press [ESC] to return                              |", // 23
+		 "|                         Press any key to return                             |", // 23
 		 "==============================================================================="  // 24
 	};
 
-	void showMainMenu(Screen *screen)
+	void openMainMenu(Screen *screen)
 	{
 		screen->draw_static(MAIN_MENU, 25);
+		while (screen->getGaneState() == gameState::paused){ // using while loop to not use recursion
+			int choice = getMenuChoice();
+		switch (choice)
+		{
+		case 1:
+			screen->setGameState(gameState::inGame);
+			screen->draw();
+			break;
+		case 8:
+			screen->draw_static(INSTRUCTIONS,25);
+			scanf("%c");
+			break;
+		case 9:
+			exit(0);
+		default:
+			break;
+		}
+		}
+		
 	}
 
 	int getMenuChoice()

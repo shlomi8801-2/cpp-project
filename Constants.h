@@ -1,6 +1,6 @@
 #pragma once
 
-enum gameState
+enum class gameState
 {
 	mainMenu,
 	instructions,
@@ -11,24 +11,11 @@ enum gameState
 	victory
 };
 
-enum class Direction // leave as class because its not used as int as much and also defined STAY twice
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	STAY
-};
 
-enum Action
-{
-	MOVE_UP,
-	MOVE_DOWN,
-	MOVE_LEFT,
-	MOVE_RIGHT,
-	STAY,
-	DROP_ITEM,
+enum Keys{
+
 	ESC = 27
+
 };
 
 enum ScreenSize

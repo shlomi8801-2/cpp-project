@@ -10,13 +10,13 @@ Exercise 1:
   > must:
   > * ~~two players~~
   > * ~~walls~~
-  > * keys
+  > * ~~keys~~
   > * ~~doors~~
   >
   > select 3 to add:
   > * bomb
-  > * switch
-  > * obstacle(block you can’t go through
+  > * ~~switch~~
+  > * obstacle(block you can’t go through)
   > * riddle
   > * torch(if selected you need to add also dark rooms)
   > * spring

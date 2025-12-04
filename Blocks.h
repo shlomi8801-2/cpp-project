@@ -9,5 +9,6 @@ namespace Blocks
     const Object Switch = Object('/', false, false, true, 4); // '\' when "on" state
     const Object Obstacle = Object('*', true, false, true, 5);
     const Object Air = Object(' ', false, false, false);
-    const Object Door = Object(' ', true,false,true,1);
+    const Object Door = Object(' ', true,false,true,1); // need to set door id and sprite - generate does it automatically
+    const Object Key = Object('K', true,false,true,2); //need to set keyId
 }

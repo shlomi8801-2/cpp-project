@@ -18,18 +18,7 @@ int main()
     int currentLevel = 1;
     Screen mainscreen(&currentLevel);
 
-    // Show main menu first
-    mainmenu::showMainMenu(&mainscreen);
-    int choice = mainmenu::getMenuChoice();
-
-    // I want to move this to MainMenu namespace but for now its ok here
-    // Also I want to add instructions screen later
-
-    if (choice == 3)
-    {
-        // Quit
-        return 0;
-    }
+    
 
     // Start game
     Player p1(77, 5, "dxawse", &mainscreen); // maybe it doesnt look friendly but i think its the best way to send key binds if we dont want another array with players

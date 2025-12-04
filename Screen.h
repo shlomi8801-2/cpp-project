@@ -42,4 +42,6 @@ public:
     void keyCheck(char c);
     void checkPlayersLevel(); // checking current pkayers levels to draw the new level if needed
     inline int getCurrentLevel() {return *currLevel;}
+    inline gameState getGaneState() { return currState;}
+    inline void setGameState(gameState state) {currState = state;}
 };

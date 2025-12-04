@@ -5,6 +5,7 @@
 #include "console.h"
 #include "Blocks.h"
 #include "Layouts.h"
+#include "MainMenu.h"
 
 using namespace std;
 // use array to store the screen background and have another array for players to draw
@@ -142,6 +143,7 @@ void Screen::updateLegend()
     cout << "level:" << *currLevel <<" inventory:" << (!pinv ? ' ' : pinv->getSprite()) << "   x:"<<parr[0]->getX()<< " y:"<<parr[0]->getY(); // basically "if not pinv" to check if its nullptr == didn't work
 }
 void Screen::tick(){
+    if (currState == gameState::inGame)
     for (Player* p : parr){
         // cout << p<<flush;
         
@@ -153,6 +155,10 @@ void Screen::keyCheck(char c){
     for (Player* p : parr){
         // cout << p<<flush;
         p->keyCheck(c);
+    }
+    if (c == Keys::ESC){
+        currState = gameState::paused;
+        mainmenu::openMainMenu(this);
     }
 }
 void Screen::checkPlayersLevel(){

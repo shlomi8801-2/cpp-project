@@ -3,6 +3,6 @@
 
 namespace mainmenu
 {
-    void showMainMenu(Screen *screen);
+    void openMainMenu(Screen *screen);
     int getMenuChoice();
 }
