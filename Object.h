@@ -1,6 +1,6 @@
 #pragma once
 class Player; // required because of including each other
-#include "Player.h"
+
 
 class Object
 {
@@ -60,3 +60,4 @@ public:
     bool canOpenDoor(Player* p = 0);
     ~Object();
 };
+#include "Player.h"

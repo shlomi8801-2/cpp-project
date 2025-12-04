@@ -1,8 +1,9 @@
 #pragma once
+#include "Object.h"
 #include "Player.h"
 #include <cstddef> // for size_t and other standard c things
 #include "Constants.h"
-#include "Object.h"
+
 class Player;
 
 
