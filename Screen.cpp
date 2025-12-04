@@ -90,31 +90,33 @@ bool Screen::canMoveTo(const int x, const int y, Player* p)
 {
      //doesn't matter if its 2 if statements or switch case because the special objects that are not pickable are just 
     //door and obstacle
-    bool output = !((x >= 0 && y >= 0 && x <= gameWidth && y <= -gameHeight));// y is -height because the screen starts at 0 0 and shows at x -y
+    bool inBonds = !((x >= 0 && y >= 0 && x <= gameWidth && y <= -gameHeight));// y is -height because the screen starts at 0 0 and shows at x -y
     Object* target = getatxy(x,y);
-    if (output && target->getfilled()){
+    if (inBonds && target->getfilled()){
         //check here if door obstacle or just normal block
         switch (target->getType()){
             case 1://door
                 if(target->canOpenDoor(p)){
-                    //if can open the door just open it for the rest of the game
-                    target->set(Blocks::Air);
+                    //do not remove the door because after you dont know which screen to move to
+                    //but open it for the rest of the game
+                    target->clearRequirements();
                     return true;
+                }else {
+                    return false;
                 }
                 break;
             case 5:
                 //need work here
                 break;
             default:
-                return false;
-            
+                return false; // if in bonds and filled but can not move
         }
-    }else if (output) {
+    }else if (inBonds) { // in bonds
         return true;
     }else {
-         return false;
+        return false;
     }
-   return false;
+    return false;
 }
 
 void Screen::clearScreen()

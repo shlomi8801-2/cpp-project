@@ -1,7 +1,6 @@
 #pragma once
 class Player; // required because of including each other
 
-
 class Object
 {
     // do we need those now?(we using array...)
@@ -43,6 +42,7 @@ public:
     bool getPickable() const { return pickable; }
     inline int getType() { return type; }
     void setPickable(bool state) { pickable = state; }
+    void clearRequirements() { for (int i =0;i<5;i++) requirements[i]=0; }
     inline bool isAir() { return (Sprite == ' ') && (filled = false); }
     inline void set(char _sprite, bool _filled = false, bool _pickable = false, bool _visible = false, int _type = 0, int _doorId = 0, int _keyId = 0, bool _switchState = 0, int _riddleId = 0)
     {
