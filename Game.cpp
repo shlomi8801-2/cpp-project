@@ -34,25 +34,24 @@ Game::~Game() {
 
 void Game::launchGame() { // no need for static its spacified in Game.h
 
-	Game newGame;
-	gameState& currState = newGame.currentState;
+	Game game;
 	Screen*& currScreen = newGame.currentScreen;
 	bool running = true;
 
 	while (running) {
-		switch (currState) {
+		switch (currentState) {
 		case gameState::mainMenu:
 			// Show main menu
 			MainMenu::showMainMenu(currScreen);
 			// Handle menu choice
-			MainMenu::handleMainMenuChoice(currState);
+			MainMenu::handleMainMenuChoice(currentState);
 			break;
 		
 		case gameState::instructions:
 			// Show instructions screen
 			MainMenu::showInstructions(currScreen);
 			// Handle return to main menu
-			MainMenu::handleInstructionsChioce(currState);
+			MainMenu::handleInstructionsChioce(currentState);
 			break;
 		
 		case gameState::inGame:
