@@ -40,4 +40,6 @@ public:
     }
     void tick(); //game update
     void keyCheck(char c);
+    void checkPlayersLevel(); // checking current pkayers levels to draw the new level if needed
+    inline int getCurrentLevel() {return *currLevel;}
 };

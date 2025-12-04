@@ -100,6 +100,8 @@ bool Screen::canMoveTo(const int x, const int y, Player* p)
                     //do not remove the door because after you dont know which screen to move to
                     //but open it for the rest of the game
                     target->clearRequirements();
+                    //its already moving so why not switch the level also
+                    p->moveToLevel(target->getDoorId());
                     return true;
                 }else {
                     return false;
@@ -149,7 +151,12 @@ void Screen::tick(){
 void Screen::keyCheck(char c){
     for (Player* p : parr){
         // cout << p<<flush;
-        
         p->keyCheck(c);
+    }
+}
+void Screen::checkPlayersLevel(){
+    if (parr[0]->getLevel() == parr[1]->getLevel()){
+        *currLevel = parr[0]->getLevel();
+        draw();
     }
 }

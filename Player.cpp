@@ -137,7 +137,9 @@ void player::keyCheck(char key = 0)
 #endif
 void Player::draw()
 {
+    //check if the player is on the level first
     // because the player is only 1 char using DrawAt function
+    if (canmove)
     DrawAt(grid->getstartx() + x, grid->getstarty() + y, sprite);
 }
 void Player::tick(){
@@ -150,6 +152,7 @@ void Player::moveToLevel(int _level){
     canmove = false;
     //now set the x and y to the opposite side like its really level by level
     vx = vy = 0;
+    DrawAt(grid->getstartx() + x, grid->getstarty() + y,grid->getatxy(x,y)->getSprite());
     if (x == MAX_X){
         x=0;
     }else if (x == 0)
