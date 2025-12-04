@@ -13,6 +13,5 @@ namespace MainMenu {
 		screen->draw_static(INSTRUCTIONS, 25);
 	}
 
-    void static handleMainMenuChoice(gameState& state);
-	void static handleInstructionsChioce(gameState& state);
+    
 }

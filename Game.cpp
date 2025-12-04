@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "MainMenu.h"
 #include "Room.h"
 
 enum class gameState;
@@ -8,7 +7,6 @@ enum class gameState;
 Game::Game() {
 	currentState = gameState::mainMenu;
 	currentScreen = new Screen;
-	rooms[3] = nullptr;
 	currRoomId = -1;
 
 	player1 = nullptr;
@@ -19,11 +17,7 @@ Game::~Game() {
 	if (currentScreen != nullptr) {
 		delete currentScreen;
 	}
-	for (Room* room : rooms) {
-		if (room != nullptr) {
-			delete room;
-		}
-	}
+
 	if (player1 != nullptr) {
 		delete player1;
 	}
@@ -35,23 +29,22 @@ Game::~Game() {
 void Game::launchGame() { // no need for static its spacified in Game.h
 
 	Game game;
-	Screen*& currScreen = newGame.currentScreen;
 	bool running = true;
 
 	while (running) {
 		switch (currentState) {
 		case gameState::mainMenu:
 			// Show main menu
-			MainMenu::showMainMenu(currScreen);
+			Room::showMainMenu(currentScreen);
 			// Handle menu choice
-			MainMenu::handleMainMenuChoice(currentState);
+			Room::handleMainMenuChoice(currentState);
 			break;
 		
 		case gameState::instructions:
 			// Show instructions screen
-			MainMenu::showInstructions(currScreen);
+			Room::showInstructions(currScreen);
 			// Handle return to main menu
-			MainMenu::handleInstructionsChioce(currentState);
+			Room::handleInstructionsChioce(currentState);
 			break;
 		
 		case gameState::inGame:
@@ -84,23 +77,6 @@ void Game::launchGame() { // no need for static its spacified in Game.h
 
 }
 
-void Game::initialize() {
-
-	rooms[0] = new Room(0);
-	rooms[1] = new Room(1);
-	rooms[2] = new Room(2);
-
-	for (int i = 0; i < 3; i++) {
-		rooms[i]->setScreen(currentScreen);
-		rooms[i]->initializeDefault();
-	}
-
-	currRoomId = 0;
-	rooms[0]->activate();
-
-	player1 = new Player(Point(5, 5, 0, 0, 'A'), nullptr, 1);
-	player2 = new Player(Point(10, 5, 0, 0, 'B'), nullptr, 2);
-}
 
 void Game::changeRoom(int newRoomId, int spawnX, int spawnY) {
 	currRoomId = newRoomId;

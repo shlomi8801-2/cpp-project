@@ -11,16 +11,12 @@ class Game {
 
 	// Current screen - the idea is to have multiple screens for menus, game, etc. that can be switched.
 	// This is because if the players move to a new screen and then return, we want to preserve the screen state.
-	Screen* currentScreen;
+	Screen currentScreen;
 
-	Room* rooms[3];
-	int currRoomId; 
-
-	
-
-public:
 	Player* player1;
 	Player* player2;
+	
+public:
 	Game::Game();
 	Game::~Game();
 
