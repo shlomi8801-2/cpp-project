@@ -7,28 +7,28 @@ namespace levels
 {
 	const char* level2map[80] = {
 	 // 01234567890123456789012345678901234567890123456789012345678901234567890123456789
-		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", // 0
-		"W                                                                             W", // 1
-		"W                                                                             W", // 2
-		"W                                                                             W", // 3
-		"W                            WWWWWWWWWWWWWWWWWWW                              W", // 4
-		"W                           WWWWWWWWWWWWWWWWWWWWW                             W", // 5
-		"W                                              @W                             W", // 6
-		"W                           WWWWWWWWWWWWWWWWWWWWW                             W", // 7
-		"W                       #   WWWWWWWWWWWWWWWWWWWWW                             W", // 8
-		"W                       *         WWWW   W                                    1", // 9
-		"W                       /                                                    WW", // 10
-		"W                                                                             W", // 11
-		"W                                                                             W", // 12
-		"W                                                                             W", // 13
-		"W                                                                             W", // 14
-		"W                                                                             W", // 15
-		"W                                                                             W", // 16
-		"W                                                                             W", // 17
-		"W                                                                             W", // 18
-		"W                                                                             W", // 19
-		"W                                                                             W", // 20
-		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" // 21
+		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", // 0
+		"W                                                                              W", // 1
+		"W                                                                              W", // 2
+		"W                                                                              W", // 3
+		"W                            WWWWWWWWWWWWWWWWWWW                               W", // 4
+		"W                           WWWWWWWWWWWWWWWWWWWWW                              W", // 5
+		"W                                              @W                              W", // 6
+		"W                           WWWWWWWWWWWWWWWWWWWWW                              W", // 7
+		"W                       #   WWWWWWWWWWWWWWWWWWWWW                              W", // 8
+		"W                       *         WWWW   W                                     W", // 9
+		"1                       /                                                     WW", // 10
+		"W                                                                              W", // 11
+		"W                                                                              W", // 12
+		"W                                                                              W", // 13
+		"W                                                                              W", // 14
+		"W                                                                              W", // 15
+		"W                                                                              W", // 16
+		"W                                                                              W", // 17
+		"W                                                                              W", // 18
+		"W                                                                              W", // 19
+		"W                                                                              W", // 20
+		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" // 21
 	};
 	//in the levels functions dont use screen->draw it causes infinite recursion
 	void changeLayout(int levelNum, Screen *screen)
@@ -66,6 +66,9 @@ namespace levels
 			}
 		}
 		Object *obj = screen->getatxy(40, 8);
+		screen->getatxy(79,10)->set(Blocks::Door);
+		screen->getatxy(79,10)->setSprite('2');
+		screen->getatxy(79,10)->setDoorId(2);
 		obj->set(Blocks::Bomb);
 	}
 	void generateLayoutFromArr(const char* arr[MAX_Y-LEGEND_HEIGHT], Screen* screen)

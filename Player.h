@@ -36,7 +36,7 @@ public:
     void tick();
     void moveToLevel(int _level);
     int getLevel() {return level;} 
-    void unlockMove() {canmove = true;}
+    void unlockMove() {canmove = true; vx = 0; vy = 0;}
     void emptyInv();
     inline int getX() {return x;}
     inline int getY() {return y;}

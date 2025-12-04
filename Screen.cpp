@@ -127,7 +127,7 @@ void Screen::clearScreen()
     // Resets ALL objects in memory
     for (int y=0;y<gameHeight;y++)
     for (int i = 0; i < gameWidth; i++){
-        objarr[i][0].set(' ', false, false);
+        objarr[i][y].set(' ', false, false);
     }
 }
 void Screen::updateLegend()
@@ -158,6 +158,7 @@ void Screen::keyCheck(char c){
 void Screen::checkPlayersLevel(){
     if (parr[0]->getLevel() == parr[1]->getLevel()){
         *currLevel = parr[0]->getLevel();
+        clrscr();
         draw();
         parr[0]->unlockMove();
         parr[1]->unlockMove();

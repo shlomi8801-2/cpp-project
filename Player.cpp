@@ -126,20 +126,19 @@ void Player::moveToLevel(int _level){
     level = _level;
     canmove = false;
     //now set the x and y to the opposite side like its really level by level
-    vx = 0; 
-    vy = 0;
+    
     DrawAt(grid->getstartx() + x, grid->getstarty() + y,grid->getatxy(x,y)->getSprite()); // clear the last player position
-    // if (x == MAX_X-1){
-    //     x=0;
-    // }else if (x == 0)
-    // {
-    //     x=MAX_X-1;
-    // }else if (y== MAX_Y-LEGEND_HEIGHT){
-    //     y=0;
-    // }else if (y==0){
-    //     y=MAX_Y-LEGEND_HEIGHT;
-    // }
-    x -=1;
+    if (x == MAX_X-1){
+        x=1; // one more to not stay on a door
+    }else if (x == 0)
+    {
+        x=MAX_X-2;// one more to not stay on a door
+    }else if (y== MAX_Y-LEGEND_HEIGHT){
+        y=1; // one more to not stay on a door
+    }else if (y==0){
+        y=MAX_Y-LEGEND_HEIGHT-1; // one more to not stay on a door
+    }
+    // x -=1;
     grid->checkPlayersLevel(); // sends update to the screen so it will check if all the players have passed to the next level
 }
 void Player::emptyInv(){

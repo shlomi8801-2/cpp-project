@@ -15,7 +15,7 @@ int main()
     cout << "program started!" << endl;
     init_console();
     hideCursor();
-    int currentLevel = 2;
+    int currentLevel = 1;
     Screen mainscreen(&currentLevel);
 
     // Show main menu first
