@@ -102,9 +102,9 @@ bool Screen::canMoveTo(const int x, const int y, Player* p)
                     //but open it for the rest of the game
                     target->clearRequirements();
                     //its already moving so why not switch the level also
-                    p->moveToLevel(target->getDoorId());
+                    // p->moveToLevel(target->getDoorId()); //changing approach
                     
-                    return false; // doesn't matter moveToLevel does what even it needs
+                    return true; 
                 }else {
                     return false;
                 }
@@ -139,7 +139,7 @@ void Screen::updateLegend()
     // its displayed in the bottom of the screen with width * legendHeight size
     gotoxy(startx, starty + gameHeight);
     Object* pinv = parr[0]->getInv(); // by default its set to 0 because its on the stack so check it to avoid using function on nullptr(0)
-    cout << "inventory:" << (!pinv ? ' ' : pinv->getSprite()) << "   x:"<<parr[0]->getX()<< " y:"<<parr[0]->getY(); // basically "if not pinv" to check if its nullptr == didn't work
+    cout << "level:" << *currLevel <<" inventory:" << (!pinv ? ' ' : pinv->getSprite()) << "   x:"<<parr[0]->getX()<< " y:"<<parr[0]->getY(); // basically "if not pinv" to check if its nullptr == didn't work
 }
 void Screen::tick(){
     for (Player* p : parr){
@@ -159,5 +159,7 @@ void Screen::checkPlayersLevel(){
     if (parr[0]->getLevel() == parr[1]->getLevel()){
         *currLevel = parr[0]->getLevel();
         draw();
+        parr[0]->unlockMove();
+        parr[1]->unlockMove();
     }
 }

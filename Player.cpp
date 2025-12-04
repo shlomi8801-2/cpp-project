@@ -61,7 +61,9 @@ void Player::move()
         // if the block standing on is just air there is not much to do with it so skip the checks by returning
         return;
     }
-    
+    if (onblock->getType() == 1){
+        moveToLevel(onblock->getDoorId());
+    }
     
 
     if (onblock->getPickable())
@@ -70,8 +72,6 @@ void Player::move()
     }
 }
 
-// just changes the way controls work(betterkeys just add the option to stop moving by trying to move the opposite direction)
-#ifndef betterkeys
 void Player::keyCheck(char key)
 { // keyc - key char
     int i;
@@ -109,41 +109,7 @@ void Player::keyCheck(char key)
         }
     }
 }
-#else
-void player::keyCheck(char key = 0)
-{ // keyc - key char
-    int i;
-    for (i = 0; i < 6; i++)
-    {
-        if (controlKeys[i] == key)
-        {
-            switch (i)
-            {
-            case movement::up:
-                vy = vy == -1 ? 0 : 1;
-                break;
-            case movement::down:
-                vy = vy == 1 ? 0 : -1;
-                break;
-            case movement::left:
-                vx = vx == 1 ? 0 : -1;
-                break;
-            case movement::right:
-                vx = vx == -1 ? 0 : 1;
-                break;
-            case movement::stay:
-                vx = vy = 0;
-                break;
-            case movement::dropItem:
-                break;
-            default:
-                break;
-            }
-            break;
-        }
-    }
-}
-#endif
+#
 void Player::draw()
 {
     //check if the player is on the level first
@@ -162,18 +128,19 @@ void Player::moveToLevel(int _level){
     //now set the x and y to the opposite side like its really level by level
     vx = 0; 
     vy = 0;
-    // DrawAt(grid->getstartx() + x, grid->getstarty() + y,grid->getatxy(x,y)->getSprite()); // clear the last player position
-    // if (x == MAX_X){
+    DrawAt(grid->getstartx() + x, grid->getstarty() + y,grid->getatxy(x,y)->getSprite()); // clear the last player position
+    // if (x == MAX_X-1){
     //     x=0;
     // }else if (x == 0)
     // {
-    //     x=MAX_X;
+    //     x=MAX_X-1;
     // }else if (y== MAX_Y-LEGEND_HEIGHT){
     //     y=0;
     // }else if (y==0){
     //     y=MAX_Y-LEGEND_HEIGHT;
     // }
-    
+    x -=1;
+    grid->checkPlayersLevel(); // sends update to the screen so it will check if all the players have passed to the next level
 }
 void Player::emptyInv(){
     //delete inv;

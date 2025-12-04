@@ -111,7 +111,7 @@ namespace levels
 				case '8':
 				case '9':
 					targetedblock->set(Blocks::Door);
-					targetedblock->setDoorId(arr[y][x]);
+					targetedblock->setDoorId(arr[y][x] - '0');
 					targetedblock->setSprite(arr[y][x]);
 					break;
 
