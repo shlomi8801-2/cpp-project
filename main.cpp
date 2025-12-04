@@ -32,7 +32,7 @@ int main()
     }
 
     // Start game
-    Player p1(5, 5, "dxawse", &mainscreen); // maybe it doesnt look friendly but i think its the best way to send key binds if we dont want another array with players
+    Player p1(77, 5, "dxawse", &mainscreen); // maybe it doesnt look friendly but i think its the best way to send key binds if we dont want another array with players
     mainscreen.setPlayer(0, &p1);
     Player p2(2, 10, "lmjiko", &mainscreen,'b');
     mainscreen.setPlayer(1, &p2);

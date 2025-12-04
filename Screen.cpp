@@ -90,9 +90,10 @@ bool Screen::canMoveTo(const int x, const int y, Player* p)
 {
      //doesn't matter if its 2 if statements or switch case because the special objects that are not pickable are just 
     //door and obstacle
-    bool inBonds = !((x >= 0 && y >= 0 && x <= gameWidth && y <= -gameHeight));// y is -height because the screen starts at 0 0 and shows at x -y
+    bool inBonds = ((x >= 0 && y >= 0 && x < gameWidth && y <gameHeight));// y is -height because the screen starts at 0 0 and shows at x -y
+    if (!inBonds)return false;
     Object* target = getatxy(x,y);
-    if (inBonds && target->getfilled()){
+    if (target->getfilled()){
         //check here if door obstacle or just normal block
         switch (target->getType()){
             case 1://door
@@ -102,7 +103,8 @@ bool Screen::canMoveTo(const int x, const int y, Player* p)
                     target->clearRequirements();
                     //its already moving so why not switch the level also
                     p->moveToLevel(target->getDoorId());
-                    return true;
+                    
+                    return false; // doesn't matter moveToLevel does what even it needs
                 }else {
                     return false;
                 }
@@ -113,12 +115,11 @@ bool Screen::canMoveTo(const int x, const int y, Player* p)
             default:
                 return false; // if in bonds and filled but can not move
         }
-    }else if (inBonds) { // in bonds
+    }else { // in bonds
         return true;
-    }else {
-        return false;
     }
     return false;
+    return true;
 }
 
 void Screen::clearScreen()
@@ -138,7 +139,7 @@ void Screen::updateLegend()
     // its displayed in the bottom of the screen with width * legendHeight size
     gotoxy(startx, starty + gameHeight);
     Object* pinv = parr[0]->getInv(); // by default its set to 0 because its on the stack so check it to avoid using function on nullptr(0)
-    cout << "inventory:" << (!pinv ? ' ' : pinv->getSprite()); // basically "if not pinv" to check if its nullptr == didn't work
+    cout << "inventory:" << (!pinv ? ' ' : pinv->getSprite()) << "   x:"<<parr[0]->getX()<< " y:"<<parr[0]->getY(); // basically "if not pinv" to check if its nullptr == didn't work
 }
 void Screen::tick(){
     for (Player* p : parr){

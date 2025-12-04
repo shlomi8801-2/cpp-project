@@ -2,7 +2,7 @@
 class Screen;
 class Object;
 #include "Screen.h"
-
+using namespace std;
 class Player
 {
     char controlKeys[6];
@@ -38,6 +38,8 @@ public:
     int getLevel() {return level;} 
     void unlockMove() {canmove = true;}
     void emptyInv();
+    inline int getX() {return x;}
+    inline int getY() {return y;}
 };
 
 

@@ -17,7 +17,7 @@ namespace levels
 		"W                           WWWWWWWWWWWWWWWWWWWWW                             W", // 7
 		"W                       #   WWWWWWWWWWWWWWWWWWWWW                             W", // 8
 		"W                       *         WWWW   W                                    1", // 9
-		"W                       /                                                     W", // 10
+		"W                       /                                                    WW", // 10
 		"W                                                                             W", // 11
 		"W                                                                             W", // 12
 		"W                                                                             W", // 13
