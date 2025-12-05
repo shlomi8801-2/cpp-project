@@ -15,11 +15,11 @@ namespace levels
 		"W                           WWWWWWWWWWWWWWWWWWWWW                              W", // 5
 		"W                                              @W                              W", // 6
 		"W                           WWWWWWWWWWWWWWWWWWWWW                              W", // 7
-		"W                       #   WWWWWWWWWWWWWWWWWWWWW                              W", // 8
-		"W                       *         WWWW   W                                     W", // 9
-		"1                       /                                                     WW", // 10
-		"W                                                                              W", // 11
-		"W                                                                              W", // 12
+		"W                           WWWWWWWWWWWWWWWWWWWWW                              W", // 8
+		"W                       *    *    WWWW   W                                     W", // 9
+		"1         @             /                                                     WW", // 10
+		"W                       *                                                      W", // 11
+		"W                       *                                                      W", // 12
 		"W                                                                              W", // 13
 		"W                                                                              W", // 14
 		"W                                                                              W", // 15

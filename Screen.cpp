@@ -167,7 +167,7 @@ void Screen::tick(){
                     
                     for (int _x=x-3;_x<x+3;_x++){
                         for (int _y=y-3;_y<y+3;_y++){
-                            if (Screen::inScreenBonds(_x,_y)){
+                            if (Screen::inScreenBonds(_x,_y) && getatxy(_x,_y)->Exploadable()){
                                 setatxy(_x,_y,&Blocks::Air);
                                 drawOneObjectAtxy(_x,_y);
                             }
@@ -175,6 +175,7 @@ void Screen::tick(){
                     }
                     setatxy(obj->getX(),obj->getY(),&Blocks::Air);
                     drawOneObjectAtxy(x,y);
+                    delete ticking[i];
                     ticking[i] = 0;
                 }
         }

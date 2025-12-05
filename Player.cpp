@@ -32,9 +32,7 @@ void Player::move()
     if (!canmove){
         return;
     }
-    
 
-    
     Object *onblock;
     onblock = grid->getatxy(x, y);
     DrawAt(grid->getstartx() + x, grid->getstarty() + y, onblock->getvisible() ? onblock->getSprite() : ' ');
@@ -44,9 +42,6 @@ void Player::move()
     //  - special for obstacle: calculate the force needed to move it
     //  - if the item in front is pickable and inventory is empty pick it up
 
-   
-    
-    
     // currently the blocking will only work for 1 cord at a time
     if (canmove && grid->canMoveTo(x + vx, y -vy)){
         x +=vx;
@@ -66,13 +61,13 @@ void Player::move()
     }
     
 
-    if (onblock->getPickable())
+    if (onblock->getPickable() && !inv)
     {
         pickupItem(onblock); // no need to send but it takes one less call to getatxy might add it in the pickupItem func later
     }
 }
 
-void Player::keyCheck(char key)
+void Player::keyCheck(char key)//does the drop item for us
 { // keyc - key char
     int i;
     for (i=0;i<6;i++)
@@ -110,7 +105,9 @@ void Player::keyCheck(char key)
                     case 3: // bomb - add to ticking array + put as object in the screen
                         grid->setatxy(x,y,inv);
                         inv->setxy(Blocks::Bomb,x,y);
+                        grid->drawOneObjectAtxy(x,y);
                         grid->startTicking(inv);
+                        emptyInv();
                 }
                 break;
             default:
@@ -153,7 +150,7 @@ void Player::moveToLevel(int _level){
     grid->checkPlayersLevel(); // sends update to the screen so it will check if all the players have passed to the next level
 }
 void Player::emptyInv(){
-    delete inv;
+    // delete inv; // delete later
     inv = 0;
 }
 
