@@ -1,5 +1,7 @@
 #include "Object.h"
 #include "Player.h"
+
+
 void Object::set(const Object &_obj) // ctor
 {
     // does not copy x and y values
@@ -29,14 +31,6 @@ bool Object::canOpenDoor(Player* p){
         obj = requirements[i];
         if (!obj) continue;
         switch (obj->type){
-            case 0:
-            case 1:
-            case 3:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            continue;
             case 2:
             //key
             if (!(p->getInv())) return false; // doesnt have the key if doesnt have inventory
@@ -59,4 +53,10 @@ bool Object::canOpenDoor(Player* p){
 }
  Object::~Object(){
     
+}
+
+bool Object::bombTick(){
+    //remove 1 from fuze if fuze reaches a value under 0 - explode in a square shape with a distance of 3
+    //moved to screen tick function
+    return bombFuze--  <=0;
 }

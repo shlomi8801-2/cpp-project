@@ -101,6 +101,17 @@ void Player::keyCheck(char key)
                 vx = vy = 0;
                 break;
             case movement::dropItem:
+                if (!inv) break;
+                switch (inv->getType()){
+                    case 2: //key - just put as object in the screen
+                        grid->setatxy(x,y,inv);
+                        emptyInv();
+                        break;
+                    case 3: // bomb - add to ticking array + put as object in the screen
+                        grid->setatxy(x,y,inv);
+                        inv->setxy(Blocks::Bomb,x,y);
+                        grid->startTicking(inv);
+                }
                 break;
             default:
                 break;
@@ -109,7 +120,7 @@ void Player::keyCheck(char key)
         }
     }
 }
-#
+
 void Player::draw()
 {
     //check if the player is on the level first
@@ -142,7 +153,7 @@ void Player::moveToLevel(int _level){
     grid->checkPlayersLevel(); // sends update to the screen so it will check if all the players have passed to the next level
 }
 void Player::emptyInv(){
-    //delete inv;
+    delete inv;
     inv = 0;
 }
 

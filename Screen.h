@@ -18,6 +18,7 @@ class Screen
     Object objarr[ScreenSize::MAX_X][ScreenSize::MAX_Y-3];
     Player *parr[2];
     int* currLevel;
+    Object* ticking[10] = {0};
 
 public:
     
@@ -44,4 +45,7 @@ public:
     inline int getCurrentLevel() {return *currLevel;}
     inline gameState getGaneState() { return currState;}
     inline void setGameState(gameState state) {currState = state;}
+    static bool inScreenBonds(const int x,const int y);
+    void startTicking(Object* obj);
+    void drawOneObjectAtxy(int x, int y);
 };

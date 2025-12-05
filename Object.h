@@ -3,9 +3,9 @@ class Player; // required because of including each other
 
 class Object
 {
-    // do we need those now?(we using array...)
-    //  int x;
-    //  int y;
+    // do we need those now?(we using array...) - we need it for the bomb and obstacle i think
+     int x=-1;
+     int y=-1;
     char Sprite;
     bool filled = false;  // does it block the player?
     bool visible = false; // visible
@@ -22,6 +22,7 @@ class Object
     int keyId;
     bool switchState= false;
     int riddleId;
+    int bombFuze = 5; // 5 game cycles
     
 public:
     
@@ -39,6 +40,12 @@ public:
     void setfilled(bool state) { filled = state; }
     int setDoorId(int _doorId=0);
     void set(const Object &_obj);
+    void setxy(const Object &_obj,int _x=-1,int _y=-1){ // idk why i cant add const here might add later
+        set(_obj);
+        x=_x;
+        y=_y;
+        
+    }
     bool getPickable() const { return pickable; }
     inline int getType() { return type; }
     void setPickable(bool state) { pickable = state; }
@@ -57,8 +64,13 @@ public:
         switchState = _switchState;
         riddleId = _riddleId;
     }
-    Object(const Object &_obj) { this->set(_obj); }
+    Object(const Object &_obj,int _x=0,int _y=0) { this->set(_obj); x=_x;y=_y;}
     bool canOpenDoor(Player* p = 0);
     ~Object();
+    bool bombTick();
+    inline int getX() {return x;}
+    inline int getY() {return y;}
+    //set them in constructor or set
+    inline bool Exploadable() { return type !=0;}
 };
 #include "Player.h"

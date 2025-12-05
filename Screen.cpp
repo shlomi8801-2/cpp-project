@@ -6,6 +6,9 @@
 #include "Blocks.h"
 #include "Layouts.h"
 #include "MainMenu.h"
+#include "utils.h"
+//later filter those includes
+
 
 using namespace std;
 // use array to store the screen background and have another array for players to draw
@@ -62,7 +65,7 @@ void Screen::setatxy(const int x, const int y, const Object *obj)
     // if out of screen doing nothing
     int idx = y * gameWidth + x;
     if (idx >= 0 && idx <= gameHeight * gameWidth) // checking if its in the screen
-        objarr[x][y] = *obj;
+        objarr[x][y].set(*obj);
 }
 void Screen::draw()
 {
@@ -87,11 +90,14 @@ void Screen::draw()
     updateLegend();
     cout << flush; // clear the buffer of the screen in case cout missed some characters it forces it to print them somehow i think
 }
+bool Screen::inScreenBonds(const int x,const int y){
+return ((x >= 0 && y >= 0 && x < ScreenSize::MAX_X && y <ScreenSize::MAX_Y - ScreenSize::LEGEND_HEIGHT));
+}
 bool Screen::canMoveTo(const int x, const int y, Player* p)
 {
      //doesn't matter if its 2 if statements or switch case because the special objects that are not pickable are just 
     //door and obstacle
-    bool inBonds = ((x >= 0 && y >= 0 && x < gameWidth && y <gameHeight));// y is -height because the screen starts at 0 0 and shows at x -y
+    bool inBonds = inScreenBonds(x,y);// y is -height because the screen starts at 0 0 and shows at x -y
     if (!inBonds)return false;
     Object* target = getatxy(x,y);
     if (target->getfilled()){
@@ -149,6 +155,30 @@ void Screen::tick(){
         
         p->tick();
     }
+    Object* obj = 0;
+    for (int i=0;i<10;i++){
+        //for every object that should do something currently like bomb add to ticking
+        obj = ticking[i];
+        if (!obj) continue;
+        int x= obj->getX(),y=obj->getY();
+        switch (obj->getType()){
+            case 3:
+                if (obj->bombTick()){ // if fuse reached 0 - should expload
+                    
+                    for (int _x=x-3;_x<x+3;_x++){
+                        for (int _y=y-3;_y<y+3;_y++){
+                            if (Screen::inScreenBonds(_x,_y)){
+                                setatxy(_x,_y,&Blocks::Air);
+                                drawOneObjectAtxy(_x,_y);
+                            }
+                        }
+                    }
+                    setatxy(obj->getX(),obj->getY(),&Blocks::Air);
+                    drawOneObjectAtxy(x,y);
+                    ticking[i] = 0;
+                }
+        }
+    }
     
 }
 void Screen::keyCheck(char c){
@@ -169,4 +199,13 @@ void Screen::checkPlayersLevel(){
         parr[0]->unlockMove();
         parr[1]->unlockMove();
     }
+}
+void Screen::startTicking(Object* obj){
+    for (int i=0;i<10;i++){
+        if (!ticking[i])
+            ticking[i] = obj;
+    }
+}
+void Screen::drawOneObjectAtxy(int x,int y){
+    DrawAt(startx + x, starty + y,getatxy(x,y)->getSprite());
 }

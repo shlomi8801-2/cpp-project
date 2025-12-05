@@ -12,9 +12,10 @@ Exercise 1:
   > * ~~walls~~
   > * ~~keys~~
   > * ~~doors~~
+  > * screen memory - save non ticking objects in a char*[] like in layout and save the ticking array
   >
   > select 3 to add:
-  > * bomb
+  > * ~~bomb~~
   > * ~~switch~~
   > * obstacle(block you can’t go through)
   > * riddle
