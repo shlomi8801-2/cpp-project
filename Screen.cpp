@@ -140,7 +140,7 @@ void Screen::updateLegend()
     // its displayed in the bottom of the screen with width * legendHeight size
     gotoxy(startx, starty + gameHeight);
     Object* pinv = parr[0]->getInv(); // by default its set to 0 because its on the stack so check it to avoid using function on nullptr(0)
-    cout << "level:" << *currLevel <<" inventory:" << (!pinv ? ' ' : pinv->getSprite()) << "   x:"<<parr[0]->getX()<< " y:"<<parr[0]->getY(); // basically "if not pinv" to check if its nullptr == didn't work
+    cout << "map:" << *currLevel <<" inventory:" << (!pinv ? ' ' : pinv->getSprite()) << "   x:"<<parr[0]->getX()<< " y:"<<parr[0]->getY()<<"             inventory:" << (!parr[1]->getInv() ? ' ' : parr[1]->getInv()->getSprite()) << "   x:"<<parr[1]->getX()<< " y:"<<parr[1]->getY(); // basically "if not pinv" to check if its nullptr == didn't work
 }
 void Screen::tick(){
     if (currState == gameState::inGame)

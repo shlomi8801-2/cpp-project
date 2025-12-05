@@ -26,7 +26,7 @@ int main()
     Player p2(77, 10, "lmjiko", &mainscreen,'b');
     mainscreen.setPlayer(1, &p2);
 
-    
+    mainscreen.setGameState(gameState::inGame);
     //moved the change layout to draw function
     mainscreen.draw();
     while (1)
