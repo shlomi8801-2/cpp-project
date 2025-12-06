@@ -27,14 +27,14 @@ Object *Screen::getatxy(const int x, const int y)
     return (idx >= 0 && (idx <= gameHeight * gameWidth)) ? &(objarr[x][y]) : nullptr;
 }
 
-void Screen::draw_static(const char *layout[], size_t lines)
+void Screen::draw_static(const char *layout[], long int lines)
 {
     clrscr();
-    for (size_t y = 0; y < lines && y < gameHeight; y++)
+    for (long int y = 0; y < lines && y < gameHeight; y++)
     {
         gotoxy(startx, starty + y);
 
-        for (size_t x = 0; layout[y][x] != '\0' && x < gameWidth; x++)
+        for (long int x = 0; layout[y][x] != '\0' && x < gameWidth; x++)
         {
             cout << layout[y][x];
         }

@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "Player.h"
-#include <cstddef> // for size_t and other standard c things
+// #include <cstddef> // for long int and other standard c things
 #include "Constants.h"
 
 class Player;
@@ -30,7 +30,7 @@ public:
     void setatxy(const int x, const int y, const Object *obj);
     void draw();
     bool canMoveTo(const int x, const int y, Player* p=0);
-    void draw_static(const char *layout[], size_t lines);
+    void draw_static(const char *layout[], long int lines);
     void clearScreen();
     void updateLegend(); // also draws it
     void setPlayer(unsigned char idx, Player *p)
