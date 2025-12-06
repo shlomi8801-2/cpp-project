@@ -8,7 +8,7 @@ struct Layout {
 
 namespace designs
 {
-	const char* MAIN_MENU[] = {
+	static Screen mainMenu({
 		//0123456789012345678901234567890123456789012345678901234567890123456789012345678
 		"===============================================================================", // 0
 		"|                                                                             |", // 1
@@ -35,9 +35,9 @@ namespace designs
 		"|                                                                             |", // 22
 		"|                                                                             |", // 23
 		"==============================================================================="  // 24
-	};
+	});
 
-	const char* INSTRUCTIONS[] = {
+	static Screen instructions({
 		//0123456789012345678901234567890123456789012345678901234567890123456789012345678
 		 "===============================================================================", // 0
 		 "|                               INSTRUCTIONS                                  |", // 1
@@ -64,9 +64,9 @@ namespace designs
 		 "|=============================================================================|", // 22
 		 "|                          Press [ESC] to return                              |", // 23
 		 "==============================================================================="  // 24
-	};
+	});
 
-	inline char* room_1[] = {
+	static Screen room_0({
 		//0123456789012345678901234567890123456789012345678901234567890123456789012345678
 		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", // 0
 		"W                                                                             W", // 1
@@ -93,8 +93,8 @@ namespace designs
 		"W                                                                             W", // 22
 		"W                                                                             W", // 23
 		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"  // 24
-	};
+	});
 }
 
 
-char* getLayout(int id);
+Screen* getLayout(int id);

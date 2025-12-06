@@ -2,28 +2,28 @@
 #include "Screen.h"
 #include "Utils.h"
 #include "Point.h"
+#include "Game.h"
 
 
 
-void Player::performAction(int playerID, Action action) {
+void Player::performAction(Player& player, Action action) {
 	// CHeck for the correct player
-	Player* player = (playerID == 1) ? game.player1 : game.player2;
 	
 	switch (action) {
 	case Action::MOVE_UP:
-		player->pos.setDirection(Direction::UP);
+		player.pos.setDirection(Direction::UP);
 		break;
 	case Action::MOVE_DOWN:
-		player->pos.setDirection(Direction::DOWN);
+		player.pos.setDirection(Direction::DOWN);
 		break;
 	case Action::MOVE_LEFT:
-		player->pos.setDirection(Direction::LEFT);
+		player.pos.setDirection(Direction::LEFT);
 		break;
 	case Action::MOVE_RIGHT:
-		player->pos.setDirection(Direction::RIGHT);
+		player.pos.setDirection(Direction::RIGHT);
 		break;
 	case Action::STAY:
-		player->pos.setDirection(Direction::STAY);
+		player.pos.setDirection(Direction::STAY);
 		break;
 	default:
 		break;
@@ -33,19 +33,41 @@ void Player::performAction(int playerID, Action action) {
 void Player::move() {
     Point currLoc = pos;
     pos.move();
-    if (Screen.isWall(currLoc)) {
-        pos = currLoc; // Revert to original position if out of bounds
+	Object currObject = Screen::objectIs(pos);
+    if (currObject.filled){
+		pos = currLoc; // Revert to original position if out of bounds
     }
     pos.draw();
 }
 
-void addToInventory(object& item) {
-	if (item.getType() != 0 && item.getPickable()) { // assuming type 0 is air/general/wall
+void addToInventory(Object item) {
+	
     
 
 		////// Need to create inventory to continue //////
-    }
+    
 }
-void pickupItem(object* item) {
-   
+void pickupItem(Object* item) {
+
 }
+
+static void handleInput() {
+
+	if (check_kbhit()) {
+		char pressed = get_single_char();
+
+		if (pressed == (int)(Action::ESC)) {
+			// Open Pause Menu
+
+			return;
+		}
+		else {
+			for (static constexpr PlayerKeyBinding binding : actions) {
+				if (binding.key == pressed) {
+					Player::performAction(binding.playerID, binding.action);
+					return;
+				}
+			}
+		}
+	}
+};

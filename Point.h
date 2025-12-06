@@ -7,7 +7,7 @@ class Point
 {
 	int x = 1, y = 1;
 	int diff_x = 1, diff_y = 0;
-	char sprite = '*';
+	char sprite;
 
 public:
 	Point() {};

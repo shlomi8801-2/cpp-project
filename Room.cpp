@@ -2,10 +2,11 @@
 #include "Layouts.h"
 
 
-Room::Room(int id){
-	roomId = id;
+Room::Room(){
 	
-	currScreen = Screen(getLayout(id));
+	isActive = false;
+	haveMods = false;
+	itemsArr[5] = {};
 
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLS; j++) {
@@ -14,36 +15,7 @@ Room::Room(int id){
 	}
 }
 
-void static Room::handleMainMenuChoice(gameState& state) {
-	if (check_kbhit()) {
-		char choice = get_single_char();
-		if (choice == '1') {
-			state = gameState::inGame;  // New Game
-			return;  // New Game
-		}
-		if (choice == '8') {
-			state = gameState::instructions;
-			return;  // Instructions
-		}
-		if (choice == '9') {
-			state = gameState::quit;
-			return;  // Quit
-		}
-		sleep_ms(50);
-	}
 
-}
-
-void static Room::handleInstructionsChioce(gameState& state) {
-	if (check_kbhit()) {
-		char choice = get_single_char();
-		if (choice == 27) { // ESC key
-			state = gameState::mainMenu;
-			return;  // Return to main menu
-		}
-		sleep_ms(50);
-	}
-}
 
 
 static void Room::drawMods() {

@@ -31,17 +31,18 @@ static constexpr PlayerKeyBinding actions[] = {
 
 
 class Screen;
-class object;
+class Object;
 
 
 class Player {
 	Point pos;
-    object* inv;
+    Object inv;
+    Screen& screen;
     int playerId;
 
 public:
-    Player::Player(Point _pos, object* _inv, int ID;)
-        : pos(_pos), inv(nullptr), playerId(ID)
+    Player::Player(Point _pos, Object _inv, Screen& _curr, int ID)
+		: pos(_pos), inv(objects[0]), screen(_curr), playerId(ID)
     {
     };
     Player::~Player() { delete inv; };
@@ -49,21 +50,21 @@ public:
     Point getPosition() const { return pos; };
     int getX() const { return pos.x; };
     int getY() const { return pos.y; };
-    object* getInv() { return inv; };
+    Object* getInv() { return inv; };
     char getSprite() const { return pos.sprite; };
 
     void setPosition(int x, int y) { pos.x = x; pos.y = y; };
     void setPosition(Point newPos) { pos = newPos; };
-    static void Player::handleInput();
+    static void handleInput();
 
     static void Player::performAction(int playerID, Action action);
     void move();
     void moveTo(int x, int y) { setPosition(x, y); } // In case we need it
     void draw() { pos.draw(); }
-    void pickupItem(object* item) {
+    void pickupItem(Object* item) {
         if (item != nullptr) {
             addToInventory(*item);
         }
     }
-    void addToInventory(const object& item);
+    void addToInventory(const Object& item);
 };

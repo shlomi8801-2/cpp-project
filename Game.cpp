@@ -1,16 +1,16 @@
 #include "Game.h"
 #include "Room.h"
+#include "Layouts.h"
+#include "Screen.h"
 
 enum class gameState;
 
 // Constructor and Destructor
 Game::Game() {
 	currentState = gameState::mainMenu;
-	currentScreen = new Screen;
+	currentScreen = nullptr;
 	currRoomId = -1;
-
-	player1 = nullptr;
-	player2 = nullptr;
+	players[2] = {};
 };
 
 Game::~Game() {
@@ -18,12 +18,7 @@ Game::~Game() {
 		delete currentScreen;
 	}
 
-	if (player1 != nullptr) {
-		delete player1;
-	}
-	if (player2 != nullptr) {
-		delete player2;
-	}
+	
 };
 
 void Game::launchGame() { // no need for static its spacified in Game.h
@@ -35,16 +30,16 @@ void Game::launchGame() { // no need for static its spacified in Game.h
 		switch (currentState) {
 		case gameState::mainMenu:
 			// Show main menu
-			Room::showMainMenu(currentScreen);
+			setScreen(-2);
 			// Handle menu choice
-			Room::handleMainMenuChoice(currentState);
+			handleMainMenuChoice(currentState);
 			break;
 		
 		case gameState::instructions:
 			// Show instructions screen
-			Room::showInstructions(currScreen);
+			setScreen(-1);
 			// Handle return to main menu
-			Room::handleInstructionsChioce(currentState);
+			handleInstructionsChioce(currentState);
 			break;
 		
 		case gameState::inGame:
@@ -77,48 +72,91 @@ void Game::launchGame() { // no need for static its spacified in Game.h
 
 }
 
+void static Game::handleMainMenuChoice(gameState& state) {
+	if (check_kbhit()) {
+		char choice = get_single_char();
+		if (choice == '1') {
+			state = gameState::inGame;  // New Game
+			return;  // New Game
+		}
+		if (choice == '8') {
+			state = gameState::instructions;
+			return;  // Instructions
+		}
+		if (choice == '9') {
+			state = gameState::quit;
+			return;  // Quit
+		}
+		sleep_ms(50);
+	}
 
-void Game::changeRoom(int newRoomId, int spawnX, int spawnY) {
+}
+
+void static Game::handleInstructionsChioce(gameState& state) {
+	if (check_kbhit()) {
+		char choice = get_single_char();
+		if (choice == 27) { // ESC key
+			state = gameState::mainMenu;
+			return;  // Return to main menu
+		}
+		sleep_ms(50);
+	}
+}
+
+
+void Game::setScreen(int roomId) {
+	// Set the current room based on room ID
+	currentScreen = getLayout(roomId);
+	currentScreen->draw();
+}
+
+void Game::setScreen(Room& room) {
+	// Set the current room based on Room object
+	currentScreen = room.mods;
+	currentScreen->draw();
+}
+
+void Game::changeRoom(int newRoomId, Room newRoom, int spawnX, int spawnY) {
 	currRoomId = newRoomId;
-	rooms[newRoomId]->activate();
+	if (newRoom.haveMods) { setScreen(newRoom); }
+	else { setScreen(currRoomId); }
 	player1->setPosition(spawnX, spawnY);
 	player2->setPosition(spawnX + 2, spawnY);
 }
 
-static void handleInput() {
 
-	if (check_kbhit()) {
-		char pressed = get_single_char();
-
-		if (pressed == (int)(Action::ESC)) {
-			// Open Pause Menu
-
-			return;
-		}
-		else {
-			for (constexpr PlayerKeyBinding binding : actions) {
-				if (binding.key == pressed) {
-					Player::performAction(binding.playerID, binding.action);
-					return;
-				}
-			}
-		}
-	}
-};
 
 void gameLoop(Game& game) {
 	// Main game loop
-	while (game.getCurrentState() == (int)gameState::inGame) {
+
+	Player players[2] = {
+		Player(Point(5, 7, 0, 0, 'a'), nullptr, game.currentScreen, 1),
+		Player(Point(5, 9, 0, 0, 'b'), nullptr, game.currentScreen, 2)
+	};
+
+	Player* player1 = &players[0];
+	Player* player2 = &players[1];
+
+	Room room[5];
+	Doors doors;
+	room[0].isActive = true;
+	Game::changeRoom(0, room[0], ); ///need to add spawn positions
+
+	while (game.currentState == gameState::inGame) {
 		
 		// Handle player input
 		Player::handleInput();
 
-		game.player1->move();
-		game.player2->move();
+		player1->move();
+		player2->move();
 
-		game.getCurrentScreen()->draw();
+
+
+		;
 
 		sleep_ms(50); // Control game speed
 	}
 }
+
+
 

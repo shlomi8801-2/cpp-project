@@ -2,6 +2,9 @@
 #include <iostream>
 #include 'Layouts.h'
 #include "Constants.h"
+#include "Object.h"
+
+enum class ObjectType;
 
 class Point;
 
@@ -14,7 +17,6 @@ class Screen
 	char getCharAt(const Point& p) const;
 
 public:
-
 	// Constructor that takes a screen layout
 	Screen(const char* layout[MAX_Y]) {
 		for (int i = 0; i < MAX_Y; i++) {
@@ -28,4 +30,5 @@ public:
 		return getCharAt(p) == '#';
 	}
 
+	ObjectType Screen::objectIs(const Point& p);
 };
