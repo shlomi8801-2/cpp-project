@@ -11,6 +11,11 @@ class Point
 
 public:
 	Point() {};
+	Point(int x1, int y1) {
+		x = x1;
+		y = y1;
+		sprite = ' ';
+	}
 	Point(int x1, int y1, int diffx, int diffy, char c) {
 		x = x1;
 		y = y1;

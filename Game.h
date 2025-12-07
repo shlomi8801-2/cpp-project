@@ -30,6 +30,7 @@ public:
 	static void handleMainMenuChoice(gameState& state);
 	static void handleInstructionsChioce(gameState& state);
 
+	void initializeRooms();
 	static void launchGame();
 	void changeRoom(int newRoomId, Room newRoom, int spawnX, int spawnY);
 };

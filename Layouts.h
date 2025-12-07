@@ -70,23 +70,23 @@ namespace designs
 		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", // 0
 		"W                                                                             W", // 1
 		"W                                                                             W", // 2
-		"W             ******************************         ****                     W", // 3
-		"W             *                            *         ****                     W", // 4
-		"W       \\     *                            *         ****                     0", // 5
-		"W *************************** *            *         ****                     W", // 6
-		"W                             *            *         ****                     W", // 7
-		"W                             *            *         ****                     W", // 8
-		"W***********************      *            *         ****                     W", // 9
-		"W          *******     *      *            *         ****                     W", // 10
-		"W          *     *     *      *            *         ****                     W", // 11
-		"W          *     *     *      *            *         ****                     W", // 12
-		"W          *     *     *      *            *         ****                     W", // 13
-		"W          *     *     *      *            *         ****                     W", // 14
-		"W          *     *     *      *            *         ****                     W", // 15
-		"W          *     *  \\  *      **************         ****         K           W", // 16
-		"W          *************                             ****                     W", // 17
-		"W                                                    ****                     W", // 18
-		"W                                                    ****                     W", // 19
+		"W             WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW         WWWW                     W", // 3
+		"W             W                            W         WWWW                     W", // 4
+		"W       \\     W                            W         WWWW                     0", // 5
+		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW            W         WWWW                     W", // 6
+		"W                             W            W         WWWW                     W", // 7
+		"W                             W            W         WWWW                     W", // 8
+		"WWWWWWWWWWWWWWWWWWWWWWWW      W            W         WWWW                     W", // 9
+		"W          WWWWWWW     W      W            W         WWWW                     W", // 10
+		"W          W     W     W      W            W         WWWW                     W", // 11
+		"W          W     W     W      W            W         WWWW                     W", // 12
+		"W          W     W     W      W            W         WWWW                     W", // 13
+		"W          W     W     W      W            W         WWWW                     W", // 14
+		"W          W     W     W      W            W         WWWW       W***W         W", // 15
+		"W          W     W  \\  W      WWWWWWWWWWWWWW         WWWW       W K W         W", // 16
+		"W          WWWWWWWWWWWWW                             WWWW       WWWWW         W", // 17
+		"W                                                    WWWW                     W", // 18
+		"W                                                    WWWW                     W", // 19
 		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", // 20
 		"W                          ------ INVENTORY ------                            W", // 21
 		"W       PLAYER 1:                     |       PLAYER 2:                       W", // 22

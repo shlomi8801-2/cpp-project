@@ -28,4 +28,5 @@ enum class Action {
 	ESC = 27
 };
 
-enum ScreenSize { MAX_X = 80, MAX_Y = 25 };
+enum ScreenSize { MAX_X = 80, MAX_Y = 25 ,MAX_Y_INGAME = 21};
+enum roomCount { TOTAL_ROOMS = 3 };

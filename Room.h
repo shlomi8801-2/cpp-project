@@ -5,16 +5,20 @@
 #include "Layouts.h"
 #include "Object.h"
 
+
 class Room {
-	
-	bool isActive;
+	int roomId;
+	bool active;
 	bool haveMods;
 	Screen mods[MAX_Y][MAX_X];
-	Object* objectsArr[5];
+	Object objectsArr[10];
 
 public:
-	Room();
-	static void drawMods();
-	static void addMod(int x, int y, char modChar);
-	static void saveMods();
+	Room(int id);
+	
+	void initializeRooms(Room** rooms);
+	void loadObjectsFromLayout(const Screen& layout);
+
+	Object* getObjectsArr() { return objectsArr; }
+	int getRoomId() const { return roomId; }
 };

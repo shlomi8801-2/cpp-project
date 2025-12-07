@@ -1,6 +1,7 @@
 #pragma once
 #include "Point.h"
-#include "Player.h"
+
+class Player;
 
 enum class ObjectType {
     AIR = ' ',
@@ -12,7 +13,8 @@ enum class ObjectType {
     KEY = 'K',
     SWITCH_OFF = '\\',
 	SWITCH_ON = '/',
-	RIDDLE = '?'
+	RIDDLE = '?',
+	DOOR = 'D'
 };
 
 class Object {
@@ -28,15 +30,23 @@ public:
         sprite(_type), type(_type), pos(_pos), filled(false), pickable(false)
     {
     };
-    Object() : sprite(ObjectType::AIR), type(ObjectType::AIR), filled(false), pickable(false) {};
-    Object* Object::getObjectPosInArr(Object* objectArr, Point pos);
-	ObjectType getType() const { return type; }
-	Point getPos() const { return pos; }
-    void interact(Player p);
-    
+    Object() : sprite(ObjectType::AIR), type(ObjectType::AIR), pos(Point(-1, -1, 0, 0, ' ')), filled(false), pickable(false) {};
+
 	void setType(ObjectType _type) { type = _type; }
 	void setSprite(char c) { sprite = c; }
 	void setPos(Point _pos) { pos = _pos; }
+
+    ObjectType getType() const { return type; }
+    Point getPos() const { return pos; }
+    char getSprite() const { return sprite; }
+    bool isFilled() const { return filled; }
+    bool isPickable() const { return pickable; }
+
+    void setType(ObjectType _type) { type = _type; }
+    void setSprite(char c) { sprite = c; }
+    void setPos(Point _pos) { pos = _pos; }
+
+    void interact(Player& p);
 
 private:
     void toggleSwitch();

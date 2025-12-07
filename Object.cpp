@@ -2,16 +2,8 @@
 #include "Screen.h"
 
 
-Object* Object::getObjectPosInArr(Object* objectArr, Point pos) {
-    for (Object& obj : objectArr) {
-        if (obj.pos.getX() == pos.getX() && obj.pos.getY() == pos.getY()) {
-            return &obj;
-        }
-    }
-}
-
-void Object::interact(Player p) {
-	if (pickable && p.getInv() == nullptr) { 
+void Object::interact(Player& p) {
+	if (pickable && p.getInv().getType() == ObjectType::AIR) {
         p.pickupItem(this);
         return;
     }

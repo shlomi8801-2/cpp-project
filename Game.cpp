@@ -119,12 +119,14 @@ void Game::setScreen(Room& room) {
 void Game::changeRoom(int newRoomId, Room newRoom, int spawnX, int spawnY) {
 	currRoomId = newRoomId;
 	if (newRoom.haveMods) { setScreen(newRoom); }
-	else { setScreen(currRoomId); }
+	else { 
+		setScreen(currRoomId);
+		newRoom.haveMods = true;
+		newRoom.mods = *currentScreen;
+	}
 	player1->setPosition(spawnX, spawnY);
 	player2->setPosition(spawnX + 2, spawnY);
 }
-
-
 
 void gameLoop(Game& game) {
 	// Main game loop
@@ -137,10 +139,17 @@ void gameLoop(Game& game) {
 	Player* player1 = &players[0];
 	Player* player2 = &players[1];
 
-	Room room[5];
-	Doors doors;
-	room[0].isActive = true;
-	Game::changeRoom(0, room[0], ); ///need to add spawn positions
+	Room** rooms = new Room*[TOTAL_ROOMS];  // Array of pointers to Room
+	Object* doors[TOTAL_ROOMS];
+	for (int i = 0; i < TOTAL_ROOMS; i++) {
+		char doorNum = char('0' + i);
+		doors[i](ObjectType::DOOR, Point(-1, -1, 0, 0, doorNum);
+		doors[i]->setSprite(doorNum);
+
+	}
+	Room::initializeRooms(rooms);
+	rooms[0]->active = true;
+	game.changeRoom(0, *rooms[0], 5, 7);
 
 	while (game.currentState == gameState::inGame) {
 		
@@ -150,12 +159,14 @@ void gameLoop(Game& game) {
 		player1->move();
 		player2->move();
 
-
-
-		;
-
 		sleep_ms(50); // Control game speed
 	}
+
+	// Clean up
+	for (int i = 0; i < TOTAL_ROOMS; i++) {
+		delete rooms[i];
+	}
+	delete[] rooms;
 }
 
 
