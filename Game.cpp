@@ -72,7 +72,7 @@ void Game::launchGame() { // no need for static its spacified in Game.h
 
 }
 
-void static Game::handleMainMenuChoice(gameState& state) {
+void Game::handleMainMenuChoice(gameState& state) {
 	if (check_kbhit()) {
 		char choice = get_single_char();
 		if (choice == '1') {
@@ -92,7 +92,7 @@ void static Game::handleMainMenuChoice(gameState& state) {
 
 }
 
-void static Game::handleInstructionsChioce(gameState& state) {
+void Game::handleInstructionsChioce(gameState& state) {
 	if (check_kbhit()) {
 		char choice = get_single_char();
 		if (choice == 27) { // ESC key
@@ -130,8 +130,8 @@ void gameLoop(Game& game) {
 	// Main game loop
 
 	Player players[2] = {
-		Player(Point(5, 7, 0, 0, 'a'), nullptr, game.currentScreen, 1),
-		Player(Point(5, 9, 0, 0, 'b'), nullptr, game.currentScreen, 2)
+		Player(Point(5, 7, 0, 0, 'a'), Object(), game.currentScreen, 1),
+		Player(Point(5, 9, 0, 0, 'b'), Object(), game.currentScreen, 2)
 	};
 
 	Player* player1 = &players[0];
@@ -157,6 +157,20 @@ void gameLoop(Game& game) {
 		sleep_ms(50); // Control game speed
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

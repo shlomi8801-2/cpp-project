@@ -18,8 +18,8 @@ class Game {
 	int currRoomId;
 	
 public:
-	Game::Game();
-	Game::~Game();
+	Game();
+	~Game();
 
 	void setState(gameState newState) { currentState = newState; }
 	gameState getState() const { return currentState; }
@@ -27,9 +27,9 @@ public:
 	inline Screen* getCurrentScreen() {return currentScreen;}
 	void setScreen(int roomId);
 	void setScreen(Room& room);
-	void static handleMainMenuChoice(gameState& state);
-	void static handleInstructionsChioce(gameState& state);
+	static void handleMainMenuChoice(gameState& state);
+	static void handleInstructionsChioce(gameState& state);
 
-	static void Game::launchGame();
-	void Game::changeRoom(int newRoomId, Room newRoom, int spawnX, int spawnY);
+	static void launchGame();
+	void changeRoom(int newRoomId, Room newRoom, int spawnX, int spawnY);
 };

@@ -17,12 +17,4 @@ public:
 	static void drawMods();
 	static void addMod(int x, int y, char modChar);
 	static void saveMods();
-	void showMainMenu() {
-		screen = designs::MAIN_MENU;
-		screen->draw();
-	}
-	void showInstructions() {
-		*screen = &designs::INSTRUCTIONS;
-		screen->draw();
-	}
 };

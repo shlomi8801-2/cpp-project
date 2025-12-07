@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include 'Layouts.h'
+#include "Layouts.h"
 #include "Constants.h"
 #include "Object.h"
 
@@ -30,5 +30,5 @@ public:
 		return getCharAt(p) == '#';
 	}
 
-	ObjectType Screen::objectIs(const Point& p);
+	ObjectType objectIs(const Point& p);
 };

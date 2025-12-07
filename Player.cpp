@@ -4,7 +4,7 @@
 
 
 
-static void Player::performObjectAction(Object& obj) {
+void Player::performObjectAction(Object& obj) {
 	// Implement object interaction logic here
 	switch (objType) {
 	case ObjectType::SPRING:
@@ -34,7 +34,7 @@ static void Player::performObjectAction(Object& obj) {
 	}
 }
 
-static void Player::performInputAction(Player& player, Action action) {
+void Player::performInputAction(Player& player, Action action) {
 	
 	switch (action) {
 	case Action::MOVE_UP:
@@ -64,7 +64,7 @@ static void Player::performInputAction(Player& player, Action action) {
 void Player::move() {
     Point currLoc = pos;
     pos.move();
-	Object currObject = Screen::objectIs(pos);
+	Object currObject = screen.objectIs(pos);
     if (currObject.filled){
 		pos = currLoc; // Revert to original position if out of bounds
     }
@@ -98,7 +98,7 @@ void Player::dropItem(Object* item, Room* room) {
 	}
 }
 
-static void Player::handleInput() {
+void Player::handleInput() {
 
 	if (check_kbhit()) {
 		char pressed = get_single_char();

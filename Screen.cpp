@@ -1,5 +1,6 @@
 #include "Screen.h"
 #include "Point.h"
+#include "Layouts.h"
 
 char Screen::getCharAt(const Point& p) const {
 	return screen[p.getY()][p.getX()];
@@ -15,14 +16,14 @@ void Screen::draw() const {
 	cout.flush();
 }
 
-bool Screen::isObject(const& Point p) const {
+bool Screen::isObject(const Point& p) const { 
 	if (getCharAt(p) != ' ' && getCharAt(p) != 'W') {
 		return true;
 	}
 	return false;
 }
 
-Object Screen::objectIs(const Point& p) {
+ObjectType Screen::objectIs(const Point& p) {
 	char ch = Screen::getCharAt(p);
 	switch (ch)
 	{
@@ -47,8 +48,8 @@ Object Screen::objectIs(const Point& p) {
 	case '?':
 		return ObjectType::RIDDLE;
 		break;
-	default: // Default to AIR if unknown
-		break;
+	default:
+		return ObjectType::AIR;
 	}
 }
 

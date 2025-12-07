@@ -41,12 +41,12 @@ class Player {
     int playerId;
 
 public:
-    Player::Player(Point _pos, Object _inv, Screen& _curr, int ID)
+    Player(Point _pos, Object _inv, Screen& _curr, int ID)
         : pos(_pos), screen(_curr), playerId(ID)
 	{
 		inv = Object();
     };
-    Player::~Player() { delete inv; };
+    ~Player() {};
 
     Point getPosition() const { return pos; };
     int getX() const { return pos.x; };
