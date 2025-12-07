@@ -10,7 +10,7 @@ class Room {
 	bool isActive;
 	bool haveMods;
 	Screen mods[MAX_Y][MAX_X];
-	Object* itemsArr[5];
+	Object* objectsArr[5];
 
 public:
 	Room();

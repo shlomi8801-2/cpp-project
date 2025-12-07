@@ -15,39 +15,39 @@ void Screen::draw() const {
 	cout.flush();
 }
 
+bool Screen::isObject(const& Point p) const {
+	if (getCharAt(p) != ' ' && getCharAt(p) != 'W') {
+		return true;
+	}
+	return false;
+}
+
 Object Screen::objectIs(const Point& p) {
 	char ch = Screen::getCharAt(p);
 	switch (ch)
 	{
-	case ' ':
-		return objects[0];
-		break;
-	case 'W':
-		return objects[1];
-		break;
 	case '#':
-		return objects[2];
+		return ObjectType::SPRING;
 		break;
 	case '*':
-		return objects[3];
+		return ObjectType::OBSTACLE;
 		break;
 	case '!':
-		return objects[4];
+		return ObjectType::TORCH;
 		break;
 	case '@':
-		return objects[5];
+		return ObjectType::BOMB;
 		break;
 	case 'K':
-		return objects[6];
+		return ObjectType::KEY;
 		break;
 	case '\\':
-		return objects[7];
+		return ObjectType::SWITCH_OFF;
 		break;
 	case '?':
-		return objects[8];
+		return ObjectType::RIDDLE;
 		break;
-	default:
-		return objects[0]; // Default to AIR if unknown
+	default: // Default to AIR if unknown
 		break;
 	}
 }

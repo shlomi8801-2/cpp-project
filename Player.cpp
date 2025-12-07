@@ -1,13 +1,40 @@
 #include "Player.h"
 #include "Screen.h"
-#include "Utils.h"
-#include "Point.h"
 #include "Game.h"
 
 
 
-void Player::performAction(Player& player, Action action) {
-	// CHeck for the correct player
+static void Player::performObjectAction(Object& obj) {
+	// Implement object interaction logic here
+	switch (objType) {
+	case ObjectType::SPRING:
+		// Implement spring logic
+		break;
+	case ObjectType::OBSTACLE:
+		// Implement obstacle logic
+		break;
+	case ObjectType::TORCH:
+		// Implement torch logic
+		break;
+	case ObjectType::BOMB:
+		// Implement bomb logic
+		break;
+	case ObjectType::KEY:
+		// Implement key logic
+		break;
+	case ObjectType::SWITCH_OFF:
+		break;
+	case ObjectType::SWITCH_ON:
+		break;
+	case ObjectType::RIDDLE:
+		// Implement riddle logic
+		break;
+	default:
+		break;
+	}
+}
+
+static void Player::performInputAction(Player& player, Action action) {
 	
 	switch (action) {
 	case Action::MOVE_UP:
@@ -25,7 +52,11 @@ void Player::performAction(Player& player, Action action) {
 	case Action::STAY:
 		player.pos.setDirection(Direction::STAY);
 		break;
+	case Action::DROP_ITEM:
+		// Implement drop item logic here
+		break;
 	default:
+		player.pos.setDirection(Direction::STAY);
 		break;
 	}
 }
@@ -40,18 +71,34 @@ void Player::move() {
     pos.draw();
 }
 
-void addToInventory(Object item) {
-	
-    
 
-		////// Need to create inventory to continue //////
-    
+void Player::pickupItem(Object* item, Room* room) {
+	inv = *item;
+
+	item->setPos(Point(-1, -1, 0, 0, ' ')); // Remove item from screen
+	item->setType(ObjectType::AIR); // Set item type to AIR
+	item->setSprite(' '); // Set item sprite to empty
+
+	room->drawMods(); // Redraw room to reflect item pickup
 }
-void pickupItem(Object* item) {
 
+
+void Player::dropItem(Object* item, Room* room) {
+	if (inv.type != ObjectType::AIR) {
+		inv.pos = Point(pos.getX(), pos.getY(), 0, 0, inv->sprite); // Place item at player's position
+		for (int i = 0; i < 5; i++) {
+			if (room->objectsArr[i]->getType() == ObjectType::AIR) {
+				room->objectsArr[i] = *inv;
+				room->objectsArr[i]->setPos(this->pos);
+			}
+			inv = Object(); // Remove item from inventory
+			room->drawMods(); // Redraw room to reflect item drop
+		}
+
+	}
 }
 
-static void handleInput() {
+static void Player::handleInput() {
 
 	if (check_kbhit()) {
 		char pressed = get_single_char();
@@ -64,10 +111,11 @@ static void handleInput() {
 		else {
 			for (static constexpr PlayerKeyBinding binding : actions) {
 				if (binding.key == pressed) {
-					Player::performAction(binding.playerID, binding.action);
+					Player::performInputAction(binding.playerID, binding.action);
 					return;
 				}
 			}
 		}
 	}
 };
+

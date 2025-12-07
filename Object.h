@@ -1,5 +1,6 @@
 #pragma once
 #include "Point.h"
+#include "Player.h"
 
 enum class ObjectType {
     AIR = ' ',
@@ -10,38 +11,35 @@ enum class ObjectType {
     BOMB = '@',
     KEY = 'K',
     SWITCH_OFF = '\\',
+	SWITCH_ON = '/',
 	RIDDLE = '?'
 };
 
-//class Object {
-//    char Sprite;
-//	ObjectType type;
-//    bool filled; // does it block the player?
-//    bool visible; // visible
-//    bool pickable;
-//
-//public:
-//    Object(char ch) :
-//		Sprite(ch), type(ObjectType::AIR), filled(false), visible(true), pickable(false)
-//    {};
-//    
-//};
-
-struct Object {
-    char Sprite;
+class Object {
+    char sprite;
     ObjectType type;
+    Point pos;
     bool filled; // does it block the player?
     bool pickable;
-};
 
-static Object objects[] = {
-    {' ', ObjectType::AIR, false, false},
-    {'W', ObjectType::WALL, true, false},
-    {'#', ObjectType::SPRING, true, false},
-    {'*', ObjectType::OBSTACLE, true, false},
-    {'!', ObjectType::TORCH, false, true},
-    {'@', ObjectType::BOMB, false, true},
-    {'K', ObjectType::KEY, false, true},
-    {'\\', ObjectType::SWITCH_OFF, true, false},
-    {'?', ObjectType::RIDDLE, false, false}
+
+public:
+    Object(ObjectType _type, Point _pos) :
+        sprite(_type), type(_type), pos(_pos), filled(false), pickable(false)
+    {
+    };
+    Object() : sprite(ObjectType::AIR), type(ObjectType::AIR), filled(false), pickable(false) {};
+    Object* Object::getObjectPosInArr(Object* objectArr, Point pos);
+	ObjectType getType() const { return type; }
+	Point getPos() const { return pos; }
+    void interact(Player p);
+    
+	void setType(ObjectType _type) { type = _type; }
+	void setSprite(char c) { sprite = c; }
+	void setPos(Point _pos) { pos = _pos; }
+
+private:
+    void toggleSwitch();
+	void explodeBomb();
+	void lightTorch();
 };

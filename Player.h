@@ -42,29 +42,26 @@ class Player {
 
 public:
     Player::Player(Point _pos, Object _inv, Screen& _curr, int ID)
-		: pos(_pos), inv(objects[0]), screen(_curr), playerId(ID)
-    {
+        : pos(_pos), screen(_curr), playerId(ID)
+	{
+		inv = Object();
     };
     Player::~Player() { delete inv; };
 
     Point getPosition() const { return pos; };
     int getX() const { return pos.x; };
     int getY() const { return pos.y; };
-    Object* getInv() { return inv; };
+    Object* getInv() { return &inv; };
     char getSprite() const { return pos.sprite; };
 
     void setPosition(int x, int y) { pos.x = x; pos.y = y; };
     void setPosition(Point newPos) { pos = newPos; };
     static void handleInput();
 
-    static void Player::performAction(int playerID, Action action);
+    static void performInputAction(Player& player, Action action);
     void move();
     void moveTo(int x, int y) { setPosition(x, y); } // In case we need it
     void draw() { pos.draw(); }
-    void pickupItem(Object* item) {
-        if (item != nullptr) {
-            addToInventory(*item);
-        }
-    }
-    void addToInventory(const Object& item);
+    void pickupItem(Object* item, Room* room);
+    void dropItem(Object* item, Room* room);
 };
